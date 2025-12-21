@@ -50,7 +50,7 @@ class DonationRequestController extends Controller
 
             $users = $users_query->get();
             foreach ($users as $user){
-                $client->notify(new DonationRequestCreated($notification))
+                $client->notify(new DonationRequestCreated($notification));
             }
             //get token for each client
 

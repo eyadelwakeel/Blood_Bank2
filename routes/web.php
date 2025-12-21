@@ -11,10 +11,16 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'],function (){
     Route::get('/',[DashboardController::class,'home'])->name('dashboard');
-});
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Auth::routes();
+
+    Route::group(['middelware' => 'admin'], function(){
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    });
+
+});
+
 
 
 
@@ -23,6 +29,6 @@ Route::post('/admin/logout', function () {
     request()->session()->invalidate();
     request()->session()->regenerateToken();
 
-    return redirect('/login');
+    return redirect('admin/login');
 })->name('admin.logout');
 
