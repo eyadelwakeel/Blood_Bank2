@@ -15,3 +15,14 @@ Route::group(['prefix' => 'admin'],function (){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::post('/admin/logout', function () {
+    Auth::guard('admin')->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    return redirect('/login');
+})->name('admin.logout');
+
