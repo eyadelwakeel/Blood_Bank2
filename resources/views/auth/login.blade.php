@@ -14,7 +14,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}"> -->
+<link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
+
+
 
 <!-- Bootstrap 4 -->
 <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -40,7 +43,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="{{ route('login') }}" method="post">
+                <form action="{{ route('admin.dashboard') }}" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control  @error('email') is-invalid @enderror" placeholder="Email" name='email'>
                         <div class="input-group-append">
