@@ -43,7 +43,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="{{ route('admin.dashboard') }}" method="post">
+                <form action="{{ route('login') }}" method="POST">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control  @error('email') is-invalid @enderror" placeholder="Email" name='email'>
                         <div class="input-group-append">
