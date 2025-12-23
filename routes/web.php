@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GoveroratController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\Auth\LoginController;
@@ -25,7 +26,7 @@ Route::prefix('admin')->group(function () {
 
     // تنفيذ تسجيل الدخول
     Route::post('/login', [LoginController::class, 'login'])
-        ->name('admin.login.submit');
+        ->name('admin.login.submit')->middleware('guest:admin');
 
     // تسجيل الخروج
     Route::post('/logout', function () {
@@ -37,8 +38,8 @@ Route::prefix('admin')->group(function () {
 
     // Dashboard
     Route::middleware('admin')->group(function () {
-        Route::get('/', [DashboardController::class, 'home'])
-            ->name('admin.dashboard');
+        Route::get('/', [DashboardController::class, 'home'])->name('admin.dashboard');
+        Route::resource('goverorats', GoveroratController::class);
     });
 });
 
