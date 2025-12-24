@@ -17,29 +17,28 @@ Route::get('/', function () {
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
 
     // صفحة تسجيل الدخول
     Route::get('/login', function () {
         return view('auth.login');
-    })->name('admin.login')->middleware('guest:admin');
+    })->name('login')->middleware('guest:admin');
 
     // تنفيذ تسجيل الدخول
     Route::post('/login', [LoginController::class, 'login'])
-        ->name('admin.login.submit')->middleware('guest:admin');
-
+        ->name('login.submit')->middleware('guest:admin');
     // تسجيل الخروج
     Route::post('/logout', function () {
         Auth::guard('admin')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->route('admin.login');
-    })->name('admin.logout');
+        return redirect()->route('login');
+    })->name('logout');
 
     // Dashboard
     Route::middleware('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'home'])->name('admin.dashboard');
-        Route::resource('goverorats', GoveroratController::class);
+        Route::resource('governorates', GoveroratController::class);
     });
 });
 

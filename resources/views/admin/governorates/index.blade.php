@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Governorates List :</li>
+                <li class="breadcrumb-item active">Governorates List </li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -26,27 +26,37 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <a href="{{ route('admin.governorates.create') }}" class="btn btn-primary mb-3">Create Governorate</a>
+                  @include('admin.layouts.partials.flash_messages')
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Name</th>
                                 <th>Cities Count</th>
-                                <th style="width: 40px">Actions</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($goverorats as $goverorat)
+                            @foreach($governorates as $governorate)
                             <tr>
-                                <td>1.</td>
-                            <tr>
-                                <td>Update software</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $governorate->name }}</td>
+                                <td>{{ $governorate->cities_count }}</td>
                                 <td>
-                                    <div class="progress progress-xs">
-                                        <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                    <div class="btn-group">
+                                        <a href="{{ route('admin.governorates.edit', $governorate->id) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                            @lang('messages.edit')
+                                        </a>
+                                        <form action="{{ route('admin.governorates.destroy', $governorate->id) }}" method="POST" style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this governorate?')"><i class="fas fa-trash-alt"></i> @lang('messages.delete')</button>
+                                        </form>
                                     </div>
+                             
                                 </td>
-                                <td><span class="badge bg-danger">55%</span></td>
                             </tr>
                             @endforeach
 

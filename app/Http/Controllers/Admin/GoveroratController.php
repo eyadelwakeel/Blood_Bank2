@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\GovernoratesRequest;
 use Illuminate\Http\Request;
 use App\Models\Governorate;
 
@@ -14,8 +15,8 @@ class GoveroratController extends Controller
     public function index()
     {
         //
-        $goverorats = Governorate::paginate(10);
-        return view('admin.goverorats.index', compact('goverorats'));
+        $governorates = Governorate::withCount('cities')->paginate(10);
+        return view('admin.governorates.index', compact('governorates'));
     }
 
     /**
@@ -24,14 +25,19 @@ class GoveroratController extends Controller
     public function create()
     {
         //
+        $governorates = Governorate::all();
+        return view('admin.governorates.create', compact('governorates'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GovernoratesRequest $request)
     {
         //
+        Governorate::create($request->validated());
+        return redirect()->route('admin.governorates.index')
+        ->with('success', 'Governorate created successfully.');
     }
 
     /**
@@ -48,14 +54,20 @@ class GoveroratController extends Controller
     public function edit(string $id)
     {
         //
+        $governorate = Governorate::findOrFail($id);
+        return view('admin.governorates.edit', compact('governorate'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GovernoratesRequest $request, string $id)
     {
         //
+        $governorate = Governorate::findOrFail($id);
+        $governorate->update($request->validated());
+        return redirect()->route('admin.governorates.index')
+        ->with('success', 'Governorate updated successfully.');
     }
 
     /**

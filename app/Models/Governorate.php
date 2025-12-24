@@ -15,7 +15,7 @@ class Governorate extends Model
         'name',
     ];
 
-    public function city()
+    public function cities()
     {
         return $this->hasMany(Citiy::class, 'governorate_id');
     }
