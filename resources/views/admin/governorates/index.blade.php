@@ -27,7 +27,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <a href="{{ route('admin.governorates.create') }}" class="btn btn-primary mb-3">Create Governorate</a>
-                  @include('admin.layouts.partials.flash_messages')
+                    @include('admin.layouts.partials.flash_messages')
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -55,7 +55,7 @@
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this governorate?')"><i class="fas fa-trash-alt"></i> @lang('messages.delete')</button>
                                         </form>
                                     </div>
-                             
+
                                 </td>
                             </tr>
                             @endforeach
@@ -66,14 +66,9 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">«</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">»</a></li>
-                    </ul>
+                    {{ $governorates->links() }}
                 </div>
+
             </div>
             <!-- /.card -->
 

@@ -76,5 +76,9 @@ class GoveroratController extends Controller
     public function destroy(string $id)
     {
         //
+        $governorate = Governorate::findOrFail($id);
+        $governorate->delete();
+        return redirect()->route('admin.governorates.index')
+        ->with('success', 'Governorate deleted successfully.');
     }
 }
