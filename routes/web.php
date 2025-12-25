@@ -37,7 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
     Route::middleware('admin')->group(function () {
-        Route::get('/', [DashboardController::class, 'home'])->name('admin.dashboard');
+        Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
         Route::resource('governorates', GoveroratController::class);
     });
 });
