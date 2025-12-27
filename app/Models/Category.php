@@ -10,6 +10,9 @@ class Category extends Model
 
     protected $table = 'categories';
     public $timestamps = true;
+    protected $fillable = [
+        'name',
+    ];
 
     public function post()
     {

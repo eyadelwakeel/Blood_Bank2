@@ -2,7 +2,7 @@
 
 return [
 
-  
+
 
     'bloodbank' => 'BloodBank',
     'goverorats' => 'Goverorats',
@@ -17,5 +17,6 @@ return [
     'governorate' => 'Governorate',
     'success' => 'Operation completed successfully.',
     'edite' => 'Edit',
+    'users' => 'Users'
 
 ];
