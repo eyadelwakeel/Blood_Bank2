@@ -11,6 +11,12 @@ class Post extends Model
 
     protected $table = 'posts';
     public $timestamps = true;
+    protected $fillable = [
+        'title',
+        'content',
+        'photo',
+        'category_id',
+    ];
 
     public function users()
     {

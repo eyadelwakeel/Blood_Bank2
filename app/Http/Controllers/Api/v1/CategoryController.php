@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,6 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = User::all();
-        return view('admin.users.index',compact('users'));
     }
 
     /**
@@ -40,6 +37,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         //
+        
     }
 
     /**

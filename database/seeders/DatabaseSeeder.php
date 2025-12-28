@@ -27,8 +27,9 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             BloodTypeSeeder::class,
             AdminSeeder::class,
-            PostSedeer::class,
             CategorySeeder::class,
+            PostSedeer::class,
+            
         ]);
     }
 }

@@ -25,17 +25,20 @@ class PostController extends Controller
     //     return $posts;
     // }
 
-    public function index(Request $request){
+    public function index(Request $request)
+{
 
-        $posts = Post::where(function($query) use($request){
-            if($request->search){
-                $query->where('title','like','%'.$request->search.'%');
-            }
-            if($request->search){
-                $query->where('category_id',$request->category_id);
-            }
-        })->paginate();
+    $posts = Post::query()
+    ->when($request->filled('search'), function ($query) use ($request) {
+        $query->where('title', 'like', '%' . $request->search . '%');
+    })
+    ->when($request->filled('category_id'), function ($query) use ($request) {
+        $query->where('category_id', $request->category_id);
+    })
+    ->paginate();
+    return $this->api_success_massage($posts);
+}
 
-        return $this->api_success_massage($posts);
-    }
+
+    
 }

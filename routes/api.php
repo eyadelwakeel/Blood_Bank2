@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\DonationRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('posts',[PostController::class,'index']);
 
+    Route::apiResource('category',CategoryController::class)
+        ->except(['update','destroy']);
+        // index=>(get)donation-request store=>(post)donation-request
+
     Route::apiResource('donation-request',DonationRequestController::class)
         ->except(['update','destroy']);
         // index=>(get)donation-request store=>(post)donation-request
@@ -38,6 +43,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user-data',[UserDataController::class,'show']);
     Route::post('user-data',[UserDataController::class,'update']);
 
+    Route::middleware('auth:sanctum')->post('fav-post',[UserDataController::class,'toggleFavPost']);
+
+    // Route::post('change-password',[UserDataController::class,'changePassword']);
+
+    Route::post('logout',[AuthController::class,'logout']);
 });
 
 
