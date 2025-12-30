@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use \App\Traits\ApiResponse;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = \App\Models\Category::all();
+        return $this->api_success_massage( 'Categories retrieved successfully',$categories);
     }
 
     /**
@@ -36,8 +38,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
-        
+        $category = \App\Models\Category::findOrFail($id);
+        return $this->api_success_massage( 'Category retrieved successfully',$category);
     }
 
     /**

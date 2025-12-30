@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -40,5 +42,20 @@ class PostController extends Controller
 }
 
 
-    
+ public function toggleFavPost(Request $request)
+{
+    $user = $request->user();
+    $postId = $request->input('post_id');
+
+    if ($user->posts()->where('post_id', $postId)->exists()) {
+        $user->posts()->detach($postId);
+        $message = 'Post removed from favorites.';
+    } else {
+        $user->posts()->attach($postId);
+        $message = 'Post added to favorites.';
+    }
+
+    return $this->api_success_massage($message);
 }
+}
+

@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('posts',[PostController::class,'index']);
 
     Route::apiResource('category',CategoryController::class)
-        ->except(['update','destroy']);
-        // index=>(get)donation-request store=>(post)donation-request
+       ->only(['index', 'show']);
+        // index=>(get)all categories show=>(get)single category
 
     Route::apiResource('donation-request',DonationRequestController::class)
         ->except(['update','destroy']);
@@ -43,7 +43,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user-data',[UserDataController::class,'show']);
     Route::post('user-data',[UserDataController::class,'update']);
 
-    Route::middleware('auth:sanctum')->post('fav-post',[UserDataController::class,'toggleFavPost']);
+    Route::post('fav-post',[PostController::class,'toggleFavPost']);
+
+    
 
     // Route::post('change-password',[UserDataController::class,'changePassword']);
 
