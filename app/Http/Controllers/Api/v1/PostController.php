@@ -47,11 +47,20 @@ class PostController extends Controller
     $user = $request->user();
     $postId = $request->input('post_id');
 
+    if(!$postId){
+        return $this->api_error_massage('Post ID is required.', 400);
+    }
+    if(!Post::find($postId)){
+        return $this->api_error_massage('Post not found.', 404);
+    }
+
     if ($user->posts()->where('post_id', $postId)->exists()) {
         $user->posts()->detach($postId);
+        // $user->posts()->detach($userId);
         $message = 'Post removed from favorites.';
     } else {
         $user->posts()->attach($postId);
+        // $user->posts()->attach($userId);
         $message = 'Post added to favorites.';
     }
 
