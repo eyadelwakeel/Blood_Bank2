@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\models\BloodType;
 use App\models\Citiy;
 use App\models\Governorate;
+use App\Models\Setting;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Js;
@@ -46,6 +47,16 @@ class GeneralController extends Controller
 
         $data = [
             'cities' =>$cities
+        ];
+
+        return $this->api_response('success',"Done",$data);
+    }
+    public function setting()
+    {
+        $settings= Setting::all();
+
+        $data = [
+            'settings' =>$settings
         ];
 
         return $this->api_response('success',"Done",$data);
