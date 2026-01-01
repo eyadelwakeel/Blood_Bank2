@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             PostSedeer::class,
             SettingSeeder::class,
+            ContactUsSeeder::class,
             
         ]);
     }

@@ -10,6 +10,11 @@ class ContactUs extends Model
 
     protected $table = 'contact_us';
     public $timestamps = true;
+    protected $fillable = [
+        'subject',
+        'massage',
+        'user_id',
+    ];
 
     public function user()
     {
