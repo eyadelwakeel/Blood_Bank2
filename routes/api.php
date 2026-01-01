@@ -19,6 +19,7 @@ Route::get('blood_types',[GeneralController::class,'blood_types']);
 Route::get('governoeates',[GeneralController::class,'governoeates']);
 Route::get('cities',[GeneralController::class,'cities']);
 Route::get('settings',[GeneralController::class,'setting']);
+Route::post('contact-us',[GeneralController::class,'contact_us'])->middleware('auth:sanctum');;
 
 Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);

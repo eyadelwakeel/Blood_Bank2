@@ -7,6 +7,7 @@ use App\models\BloodType;
 use App\models\Citiy;
 use App\models\Governorate;
 use App\Models\Setting;
+use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Js;
@@ -60,5 +61,28 @@ class GeneralController extends Controller
         ];
 
         return $this->api_response('success',"Done",$data);
+    }
+    public function contact_us(Request $request)
+    {
+          $user = $request->user();
+
+        $validation = validator()->make($request->all(),[
+            'subject' => 'required|string',
+            'massage' => 'required|string',
+        ]);
+
+        if ($validation->fails())
+        {
+            return $this->api_response('error',$validation->errors()->first(),null,422);
+        }
+
+        $contact_us = \App\Models\ContactUs::create([
+            'subject' => $request->subject,
+            'massage' => $request->massage,
+            // 'user_id' => $request->user()->id,
+           'user_id' => $user->id,
+        ]);
+
+        return $this->api_success_massage('Your message has been sent successfully.',$contact_us);
     }
 }
