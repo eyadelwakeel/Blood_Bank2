@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\v1\NotificationSettingController;
 use App\Http\Controllers\Api\v1\PostController;
 use App\Http\Controllers\Api\v1\ResetPasswordController;
 use App\Http\Controllers\Api\v1\UserDataController;
+use App\Http\Controllers\Api\v1\ChangePassword;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,6 +26,7 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 
 Route::post ('forget-password',[ResetPasswordController::class,'forgetPassword']);
+Route::post ('change-password',[ChangePassword::class,'changePassword']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 

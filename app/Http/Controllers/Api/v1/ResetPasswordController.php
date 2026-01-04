@@ -24,7 +24,7 @@ class ResetPasswordController extends Controller
         $verification_code = rand(100000, 999999);
         //save the code in database
         $user->verification_code = $verification_code;
-        $user->verification_code_expires_at  = now()->addMinutes(2);
+        $user->verification_code_expires_at  = now()->addMinutes(5);
         $user->save();
         //send to user via email
         Mail::to($user->email)->send( new SendResetPassord($user) );
