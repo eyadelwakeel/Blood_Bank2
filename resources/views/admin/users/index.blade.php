@@ -26,14 +26,36 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Create Governorate</a>
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Create User</a>
                     @include('admin.layouts.partials.flash_messages')
+                    <form method="GET" action="{{ route('admin.users.filter-governorate') }}" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select name="governorate_id" class="form-control">
+                                    <option value="">-- اختر المحافظة --</option>
+                                    @foreach($governorates as $governorate)
+                                    <option value="{{ $governorate->id }}"
+                                        {{ request('governorate_id') == $governorate->id ? 'selected' : '' }}>
+                                        {{ $governorate->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">فلترة</button>
+                            </div>
+                        </div>
+                    </form>
+
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Name</th>
-                                <th>Cities Count</th>
+                                <th>City</th>
+                                <th>Governorate</th>
+                                <th>Phone</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -42,17 +64,19 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
-                                {{-- <td>{{ $user->cities_count }}</td> --}}
+                                <td>{{ $user->city->name }}</td>
+                                <td>{{ $user->city->governorate->name }}</td>
+                                <td>{{ $user->phone }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
+                                        <!-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.edit')
-                                        </a>
+                                        </a> -->
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this governorate?')"><i class="fas fa-trash-alt"></i> @lang('messages.delete')</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this patient?')"><i class="fas fa-trash-alt"></i> @lang('messages.delete')</button>
                                         </form>
                                     </div>
 
@@ -66,7 +90,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    {{ $users->links() }}
+                    {{$users->links() }}
                 </div>
 
             </div>
