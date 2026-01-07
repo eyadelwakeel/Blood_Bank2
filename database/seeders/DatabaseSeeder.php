@@ -30,15 +30,17 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            
+            BloodTypeSeeder::class,
             GovernorateSeeder::class,
             CitySeeder::class,
-            BloodTypeSeeder::class,
+            UserSeeder::class,
             AdminSeeder::class,
             CategorySeeder::class,
             PostSedeer::class,
             SettingSeeder::class,
             ContactUsSeeder::class,
-            UserSeeder::class,
+            
             
         ]);
     }

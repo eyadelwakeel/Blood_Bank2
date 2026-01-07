@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\models\Governorate;
+use App\Models\Governorate;
 use App\Models\DonationRequest;
 
-class Citiy extends Model
+class City extends Model
 {
 
     protected $table = 'cities';
@@ -24,7 +24,7 @@ class Citiy extends Model
 
     public function user()
     {
-        return $this->hasMany(User::class, 'user_id');
+        return $this->hasMany(User::class, 'city_id');
     }
 
     public function donation_requests()

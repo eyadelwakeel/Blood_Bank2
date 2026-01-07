@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\models\Citiy;
+use App\models\City;
 use Illuminate\Database\Eloquent\Model;
 
 class Governorate extends Model
@@ -17,7 +17,7 @@ class Governorate extends Model
 
     public function cities()
     {
-        return $this->hasMany(Citiy::class, 'governorate_id');
+        return $this->hasMany(City::class, 'governorate_id');
     }
 
     public function user()

@@ -12,13 +12,29 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $users = User::paginate(10);
-        return view('admin.users.index',compact('users'));
-    }
-    public function filter_governorate(Request $request)
+//     public function index()
+//     {
+//         //
+//         $users = User::paginate(10);
+//         $governorates = Governorate::all();
+//         return view('admin.users.index',compact('users', 'governorates'));
+//     }
+//     public function filter_governorate(Request $request)
+// {
+//     $users = User::with(['city.governorate'])
+//         ->when($request->governorate_id, function ($query) use ($request) {
+//             $query->whereHas('city', function ($q) use ($request) {
+//                 $q->where('governorate_id', $request->governorate_id);
+//             });
+//         })
+//         ->paginate(10);
+
+//     $governorates = Governorate::all();
+
+//     return view('admin.users.index', compact('users', 'governorates'));
+// }
+
+public function index(Request $request)
 {
     $users = User::with(['city.governorate'])
         ->when($request->governorate_id, function ($query) use ($request) {
@@ -82,5 +98,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
+    }
+    public function toggle($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        return redirect()->route('admin.users.index')->with('success', 'User status updated successfully.');
     }
 }

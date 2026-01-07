@@ -5,6 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\BloodType;
+use App\Models\City;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -32,8 +35,8 @@ class UserFactory extends Factory
             'birth_date' => $this->faker->date(),
             'last_donation_date' => $this->faker->date(),
             'phone' => $this->faker->phoneNumber(),
-            'blood_type_id' => \App\Models\BloodType::inRandomOrder()->first()->id,
-            'city_id' => \App\Models\Citiy::inRandomOrder()->first()->id,
+            'blood_type_id' => BloodType::inRandomOrder()->first()->id,
+            'city_id' => City::inRandomOrder()->first()->id,
 
         ];
     }

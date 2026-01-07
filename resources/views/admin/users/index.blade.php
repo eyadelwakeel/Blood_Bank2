@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">Create User</a>
                     @include('admin.layouts.partials.flash_messages')
-                    <form method="GET" action="{{ route('admin.users.filter-governorate') }}" class="mb-3">
+                    <form method="GET" action="{{ route('admin.users.index') }}" class="mb-3">
                         <div class="row">
                             <div class="col-md-4">
                                 <select name="governorate_id" class="form-control">
@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">فلترة</button>
+                                <button type="submit" class="btn btn-primary">Governorate Filter</button>
                             </div>
                         </div>
                     </form>
@@ -56,6 +56,7 @@
                                 <th>City</th>
                                 <th>Governorate</th>
                                 <th>Phone</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -67,6 +68,27 @@
                                 <td>{{ $user->city->name }}</td>
                                 <td>{{ $user->city->governorate->name }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>
+                                    @if($user->is_active)
+                                    <span class="badge badge-success mr-2">Active</span>
+                                    @else
+                                    <span class="badge badge-danger mr-2">Inactive</span>
+                                    @endif
+
+                                    <form action="{{ route('admin.users.toggle', $user->id) }}"
+                                        method="POST"
+                                        style="display:inline-block">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            onclick="return confirm('هل أنت متأكد من تغيير الحالة؟')"
+                                            class="btn btn-sm {{ $user->is_active ? 'btn-warning' : 'btn-success' }}">
+                                            {{ $user->is_active ? 'Deactivate' : 'Activate' }}
+                                        </button>
+                                    </form>
+                                </td>
+
+
                                 <td>
                                     <div class="btn-group">
                                         <!-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
@@ -90,7 +112,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    {{$users->links() }}
+                    {{ $users->appends(request()->query())->links() }}
+
                 </div>
 
             </div>

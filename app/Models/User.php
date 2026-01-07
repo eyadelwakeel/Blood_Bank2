@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\BloodType;
 use App\Models\DonationRequest;
 use App\Models\Notification;
-use App\Models\Citiy;
+use App\Models\City;
 use App\Models\Governorate;
 use App\Models\ContactUs;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -30,6 +30,8 @@ class User extends Authenticatable
         'password',
         'blood_type_id',
         'city_id',
+        'is_active',
+
     ];
 
     public function bloodTypes()
@@ -43,7 +45,7 @@ class User extends Authenticatable
 
     public function city()
     {
-        return $this->belongsTo(Citiy::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function posts()

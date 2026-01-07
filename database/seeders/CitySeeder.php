@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\models\Citiy;
+use App\models\City;
 use App\models\Governorate;
 
 class CitySeeder extends Seeder
@@ -50,7 +50,7 @@ class CitySeeder extends Seeder
 
             if ($governorate) {
                 foreach ($cityNames as $cityName) {
-                    Citiy::create([
+                    City::create([
                         'name' => $cityName,
                         'governorate_id' => $governorate->id,
                     ]);

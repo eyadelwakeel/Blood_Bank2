@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\models\BloodType;
-use App\models\Citiy;
+use App\models\City;
 use App\models\Governorate;
 use App\Models\Notification;
 use App\Models\User;
@@ -41,7 +41,7 @@ class DonationRequest extends Model
 
     public function city()
     {
-        return $this->belongsTo(Citiy::class, 'city_id');
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     // public function governorate()

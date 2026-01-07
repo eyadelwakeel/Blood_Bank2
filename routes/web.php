@@ -41,7 +41,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
         Route::resource('governorates', GoveroratController::class);
         Route::resource('users', UserController::class);
-        Route::get('users/filter-governorate', [UserController::class, 'filter_governorate'])->name('users.filter-governorate');
+        Route::patch('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+        // Route::get('users/filter-governorate', [UserController::class, 'filter_governorate'])->name('users.filter-governorate');
     });
 });
 
