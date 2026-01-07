@@ -71,6 +71,14 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="{{url(route('admin.categories.index'))}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               @lang('Posts')
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
