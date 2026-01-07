@@ -39,11 +39,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Dashboard
     Route::middleware('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
+        // governorates routes
         Route::resource('governorates', GoveroratController::class);
+        // users routes
         Route::resource('users', UserController::class);
         Route::patch('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
-        // Route::get('users/filter-governorate', [UserController::class, 'filter_governorate'])->name('users.filter-governorate');
-    });
+
+        // categories routes
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);});
 });
 
 /*

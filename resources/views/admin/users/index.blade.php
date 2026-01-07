@@ -65,8 +65,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->city->name }}</td>
-                                <td>{{ $user->city->governorate->name }}</td>
+                                <td>{{ $user->city?->name }}</td>
+                                <td>{{ $user->city?->governorate?->name }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>
                                     @if($user->is_active)
