@@ -47,6 +47,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // categories routes
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);});
+        // posts routes
+        Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
 });
 
 /*

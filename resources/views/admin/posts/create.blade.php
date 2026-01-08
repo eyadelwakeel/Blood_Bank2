@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Governorates List </li>
+                <li class="breadcrumb-item active">Posts List </li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -26,35 +26,54 @@
                     <h3 class="card-title">@lang('messages.create')</h3>
                 </div>
 
-                <form action="{{ route('admin.governorates.store') }}" method="POST">
+                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Governorate Name</label>
+                            <label for="name">Post Title</label>
                             <input
                                 type="text"
-                                name="name"
+                                name="title"
                                 class="form-control"
-                                id="name"
-                                placeholder="Enter governorate name"
-                                required
-                            >
+                                id="title"
+                                placeholder="Enter post title"
+                                required>
 
                         </div>
                         <div class="form-group">
-                            <label for="name">Select Governorate</label>
-                            <select
-                                name="country_id"
+                            <label for="name">Post Content</label>
+                            <input
+                                type="text"
+                                name="content"
                                 class="form-control"
-                                id="country_id"
-                                required
-                                >
-                                @foreach($governorates as $governorate)
-                                    <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
+                                id="content"
+                                placeholder="Enter post content"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Select Category</label>
+                            <select
+                                name="category_id"
+                                class="form-control"
+                                id="category_id"
+                                required>
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            
+
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Post Photo</label>
+                            <input
+                                type="file"
+                                name="photo"
+                                class="form-control"
+                                id="photo"
+                                placeholder="Enter post photo"
+                                required>
                         </div>
                     </div>
 
@@ -73,4 +92,4 @@
 </div>
 
 
-    @endsection
+@endsection

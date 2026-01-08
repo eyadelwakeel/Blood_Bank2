@@ -42,20 +42,7 @@
                             >
 
                         </div>
-                        <div class="form-group">
-                            <label for="name">Select Governorate</label>
-                            <select
-                                name="country_id"
-                                class="form-control"
-                                id="country_id"
-                                required
-                                >
-                                @foreach($governorates as $governorate)
-                                    <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
-                                @endforeach
-                            </select>
-                            
-                        </div>
+                       
                     </div>
 
                     <div class="card-footer">

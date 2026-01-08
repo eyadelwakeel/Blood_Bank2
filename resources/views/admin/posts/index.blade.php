@@ -32,7 +32,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Name</th>
+                                <th>Title</th>
+                                <th>content</th>
+                                <th>Category</th>
+                                <th>Photo</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -40,8 +43,15 @@
                             @foreach($posts as $post)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $post->name }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->content }}</td>
                                  <td>{{ $post->category->name }}</td>
+                                <td>
+                                    @if($post->photo)
+                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Photo" width="100">
+                                    @else
+                                        No Photo
+                                    @endif
 
                                 <td>
                                     <div class="btn-group">
@@ -51,7 +61,7 @@
                                             @lang('messages.edit')
                                         </a>
 
-                                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
+                                        <form action="{{ route('admin.posts.destroy', $post->id) }}"
                                             method="POST"
                                             style="display: inline-block;">
                                             @csrf
@@ -59,7 +69,7 @@
 
                                             <button type="submit"
                                                 class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Are you sure you want to delete this category?')">
+                                                onclick="return confirm('Are you sure you want to delete this post?')">
                                                 <i class="fas fa-trash-alt"></i>
                                                 @lang('messages.delete')
                                             </button>
@@ -76,7 +86,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
-                    {{ $categories->links() }}
+                    {{ $posts->links() }}
                 </div>
 
             </div>

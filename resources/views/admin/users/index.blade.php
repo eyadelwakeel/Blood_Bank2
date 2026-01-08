@@ -81,7 +81,7 @@
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit"
-                                            onclick="return confirm('هل أنت متأكد من تغيير الحالة؟')"
+                                            onclick="return confirm('Are you sure you want to toggle this user?')"
                                             class="btn btn-sm {{ $user->is_active ? 'btn-warning' : 'btn-success' }}">
                                             {{ $user->is_active ? 'Deactivate' : 'Activate' }}
                                         </button>
