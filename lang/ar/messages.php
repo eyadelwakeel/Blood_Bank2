@@ -17,5 +17,12 @@ return [
     'governorate' => 'المحافظة',
     'success' => 'تمت العملية بنجاح.',
     'edite' => 'تعديل',
+    'contacts' => 'جهات الاتصال',
+    'posts' => 'المنشورات',
+    'categories' => 'الفئات',
+    'users' => 'المستخدمين',
+    'settings' => 'الإعدادات',
+    'logout' => 'تسجيل الخروج',
+    'donation_requests' => 'طلبات التبرع',
 
 ];

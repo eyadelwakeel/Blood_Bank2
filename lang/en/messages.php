@@ -17,6 +17,13 @@ return [
     'governorate' => 'Governorate',
     'success' => 'Operation completed successfully.',
     'edite' => 'Edit',
-    'users' => 'Users'
+    'users' => 'Users',
+    'categories' => 'Categories',
+    'posts' => 'Posts',
+    'contacts' => 'Contacts',
+    'settings' => 'Settings',
+    'logout' => 'Logout',
+    'donation_requests' => 'Donation Requests',
+    
 
 ];
