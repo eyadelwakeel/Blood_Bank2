@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             PostSedeer::class,
             SettingSeeder::class,
             ContactUsSeeder::class,
+            DonationRequestSeeder::class,
             
             
         ]);
