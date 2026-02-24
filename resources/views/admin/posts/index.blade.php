@@ -45,12 +45,12 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->content }}</td>
-                                 <td>{{ $post->category->name }}</td>
+                                <td>{{ $post->category->name }}</td>
                                 <td>
                                     @if($post->photo)
-                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Photo" width="100">
+                                    <img src="{{ asset('posts/'. $post->photo) }}" alt="Post Photo" width="100">
                                     @else
-                                        No Photo
+                                    No Photo
                                     @endif
 
                                 <td>

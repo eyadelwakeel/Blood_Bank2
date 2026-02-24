@@ -32,35 +32,33 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Name</th>
-                                <th>Age</th>
+                               
                                 <th>Blood Type</th>
                                 <th>City</th>
                                 <th>Phone</th>
+                                <th>Actions</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($donationRequests as $donationRequest)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $donationRequest->name }}</td>
-                                <td>{{ $donationRequest->age }}</td>
-                                <td>{{ $donationRequest->blood_type }}</td>
-                                <td>{{ $donationRequest->city }}</td>
+                                <td>{{ $donationRequest->bloodType->name }}</td>
+                                <td>{{ $donationRequest->city->name }}</td>
                                 <td>{{ $donationRequest->phone }}</td>
                                 <td>
-                                    @if($donationRequest->photo)
-                                        <img src="{{ asset('storage/' . $donationRequest->photo) }}" alt="Post Photo" width="100">
-                                    @else
-                                        No Photo
-                                    @endif
-
-                                <td>
+                                
                                     <div class="btn-group">
                                         <a href="{{ route('admin.donation_requests.edit', $donationRequest->id) }}"
                                             class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.edit')
+                                        </a>
+                                        <a href="{{ route('admin.donation_requests.show', $donationRequest->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                            @lang('messages.view')
                                         </a>
 
                                         <form action="{{ route('admin.donation_requests.destroy', $donationRequest->id) }}"
@@ -76,7 +74,9 @@
                                                 @lang('messages.delete')
                                             </button>
                                         </form>
+                                        
                                     </div>
+
                                 </td>
 
                             </tr>

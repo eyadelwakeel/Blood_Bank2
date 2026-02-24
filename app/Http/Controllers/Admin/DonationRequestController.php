@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\DonationRequest;
 use App\Services\ReverseGeocodingService;
 
+
 class DonationRequestController extends Controller
 {
     /**
@@ -39,12 +40,17 @@ class DonationRequestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id, ReverseGeocodingService $geocodingService)
+    public function show(DonationRequest $donationRequest, ReverseGeocodingService $geocodingService)
     {
-        $donationRequest = DonationRequest::findOrFail($id);
-        $address = $geocodingService->getAddress($donationRequest->latitude, $donationRequest->longitude);
-        return view('admin.donation_requests.show', compact('donationRequest', 'address'));
-    }   
+        $donationRequest->load('city');
+
+        $hospital_address = $geocodingService->getAddress(
+            $donationRequest->latitude,
+            $donationRequest->longitude
+        );
+
+        return view('admin.donation_requests.show', compact('donationRequest', 'hospital_address'));
+    }
    
 
     /**
@@ -70,4 +76,15 @@ class DonationRequestController extends Controller
     {
         //
     }
+    // public function show1($id, ReverseGeocodingService $geoService)
+    // {
+    //     $donationRequest = DonationRequest::findOrFail($id);
+
+    //     $address = $geoService->getAddress(
+    //         $donationRequest->latitude,
+    //         $donationRequest->longitude
+    //     );
+
+    //     return view('admin.donation_requests.index', compact('donationRequest', 'address'));
+    // }
 }
