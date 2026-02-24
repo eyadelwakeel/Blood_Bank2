@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DonationRequest;
 use App\Services\ReverseGeocodingService;
+use App\Models\BloodType;
+use App\Models\City;
+use App\Http\Requests\Admin\DonationsRequest;
+
 
 
 class DonationRequestController extends Controller
@@ -27,14 +31,21 @@ class DonationRequestController extends Controller
     public function create()
     {
         //
+        $bloodTypes = BloodType::all();
+        $cities = City::all();
+
+        return view('admin.donation_requests.create', compact('bloodTypes', 'cities'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DonationsRequest $request)
     {
-        //
+        DonationRequest::create($request->validated());
+        return redirect()->route('admin.donation_requests.index')->with('success', 'Donation request created successfully.');
+
+
     }
 
     /**
