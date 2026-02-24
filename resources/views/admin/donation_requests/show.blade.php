@@ -13,17 +13,17 @@
 
                 <tr>
                     <th>Patient Name</th>
-                    <td>{{ $donationRequest->patient_name }}</td>
+                    <td>{{ $donationRequest->name }}</td>
                 </tr>
 
                 <tr>
                     <th>Blood Type</th>
-                    <td>{{ $donationRequest->blood_type }}</td>
+                    <td>{{ $donationRequest->bloodType->name }}</td>
                 </tr>
 
                 <tr>
                     <th>Bags Required</th>
-                    <td>{{ $donationRequest->bags_num }}</td>
+                    <td>{{ $donationRequest->bags_number }}</td>
                 </tr>
 
                 <tr>
@@ -38,12 +38,12 @@
 
                 <tr>
                     <th>Hospital Address</th>
-                    <td>{{ $hospital_address ?? 'N/A' }}</td>
+                    <td>{{ $donationRequest->hospital_address ?? 'N/A' }}</td>
                 </tr>
 
                 <tr>
                     <th>Details</th>
-                    <td>{{ $donationRequest->details }}</td>
+                    <td>{{ $donationRequest->notes }}</td>
                 </tr>
 
                 <tr>

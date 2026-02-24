@@ -41,16 +41,20 @@ class DonationRequestController extends Controller
      * Display the specified resource.
      */
     public function show(DonationRequest $donationRequest, ReverseGeocodingService $geocodingService)
-    {
-        $donationRequest->load('city');
+{
+    $donationRequest->load('city');
 
-        $hospital_address = $geocodingService->getAddress(
+    if (!$donationRequest->hospital_address) {
+        $donationRequest->hospital_address = $geocodingService->getAddress(
             $donationRequest->latitude,
             $donationRequest->longitude
         );
 
-        return view('admin.donation_requests.show', compact('donationRequest', 'hospital_address'));
+        $donationRequest->save();
     }
+
+    return view('admin.donation_requests.show', compact('donationRequest'));
+}
    
 
     /**
