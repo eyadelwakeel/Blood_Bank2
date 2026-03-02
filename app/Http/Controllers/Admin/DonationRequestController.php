@@ -43,7 +43,7 @@ class DonationRequestController extends Controller
     public function store(DonationsRequest $request)
     {
         DonationRequest::create($request->validated());
-        return redirect()->route('admin.donation_requests.index')->with('success', 'Donation request created successfully.');
+        return redirect()->route('admin.donation-requests.index')->with('success', 'Donation request created successfully.');
 
 
     }
@@ -74,6 +74,10 @@ class DonationRequestController extends Controller
     public function edit(string $id)
     {
         //
+        $donationRequest = DonationRequest::findOrFail($id);
+        $bloodTypes = BloodType::all();
+        $cities = City::all();
+        return view('admin.donation_requests.edit', compact('donationRequest', 'bloodTypes', 'cities'));
     }
 
     /**
@@ -82,6 +86,9 @@ class DonationRequestController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $donationRequest = DonationRequest::findOrFail($id);
+        $donationRequest->update($request->all());
+        return redirect()->route('admin.donation-requests.index')->with('success', 'Donation request updated successfully.');
     }
 
     /**
@@ -90,16 +97,9 @@ class DonationRequestController extends Controller
     public function destroy(string $id)
     {
         //
+        $donationRequest = DonationRequest::findOrFail($id);
+        $donationRequest->delete();
+        return redirect()->route('admin.donation-requests.index')->with('success', 'Donation request deleted successfully.');
     }
-    // public function show1($id, ReverseGeocodingService $geoService)
-    // {
-    //     $donationRequest = DonationRequest::findOrFail($id);
-
-    //     $address = $geoService->getAddress(
-    //         $donationRequest->latitude,
-    //         $donationRequest->longitude
-    //     );
-
-    //     return view('admin.donation_requests.index', compact('donationRequest', 'address'));
-    // }
+    
 }

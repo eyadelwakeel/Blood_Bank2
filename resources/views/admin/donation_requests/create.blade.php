@@ -21,10 +21,20 @@
     <div class="card">
         <div class="card-header">
             <h3>Create Donation Request</h3>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <h5>Errors:</h5>
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.donation_requests.store') }}" method="POST">
+            <form action="{{ route('admin.donation-requests.store') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
@@ -41,7 +51,7 @@
                     <label for="blood_type_id" class="form-label">Blood Type</label>
                     <select name="blood_type_id" id="blood_type_id" class="form-select" required>
                         @foreach($bloodTypes as $bloodType)
-                            <option value="{{ $bloodType->id }}">{{ $bloodType->name }}</option>
+                        <option value="{{ $bloodType->id }}">{{ $bloodType->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -60,7 +70,7 @@
                     <label for="city_id" class="form-label">City</label>
                     <select name="city_id" id="city_id" class="form-select" required>
                         @foreach($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        <option value="{{ $city->id }}">{{ $city->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -86,7 +96,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a href="{{ route('admin.donation_requests.index') }}" class="btn btn-secondary">Cancel</a>
+                <a href="{{ route('admin.donation-requests.index') }}" class="btn btn-secondary">Cancel</a>
 
             </form>
         </div>

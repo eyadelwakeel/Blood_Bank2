@@ -33,15 +33,15 @@ class DonationRequestSeeder extends Seeder
         DonationRequest::create([
             'name' => 'Jane Smith',
             'age' => 25,
-            'blood_type_id' => $bloodType->id ?? 1,
+            'blood_type_id' => $bloodType->id ?? 4,
             'longitude' => 32.2400,
             'latitude' => 29.0500,
-            'city_id' => $city->id ?? 1,
+            'city_id' => $city->id ?? 3,
             'phone' => '01000000002',
             'notes' => 'Blood needed for surgery',
             'hospital_name' => 'Nile Hospital',
             'bags_number' => 3,
-            'user_id' => $user->id ?? 1,
+            'user_id' => $user->id ?? 3,
         ]);
     }
 }

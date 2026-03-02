@@ -18,7 +18,7 @@ class CreateDonationRequestsTable extends Migration {
 			$table->string('phone');
 			$table->text('notes');
 			$table->string('hospital_name');
-			$table->unsignedBigInteger('user_id');
+			$table->foreignId('user_id')->nullable();
 			$table->timestamps();
 		});
 	}

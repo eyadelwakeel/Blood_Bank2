@@ -46,7 +46,7 @@ class CreateForeignKeys extends Migration {
 		});
 		Schema::table('donation_requests', function(Blueprint $table) {
 			$table->foreign('user_id')->references('id')->on('users')
-						->onDelete('restrict')
+						->onDelete('set null')
 						->onUpdate('restrict');
 		});
 		Schema::table('contact_us', function(Blueprint $table) {

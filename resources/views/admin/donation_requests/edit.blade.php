@@ -26,48 +26,128 @@
                     <h3 class="card-title">@lang('messages.edite')</h3>
                 </div>
 
-                <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+                <form action="{{ route('admin.donation-requests.update', $donationRequest->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Post Title</label>
+                            <label for="name">Donation Request Name</label>
                             <input
                                 type="text"
-                                value="{{ $post->title }}"
-                                name="title"
+                                value="{{ $donationRequest->name }}"
+                                name="name"
                                 class="form-control"
-                                id="title"
-                                placeholder="{{ $post->title }}"
+                                id="name"
+                                placeholder="{{ $donationRequest->name }}"
                                 required
                             >
 
                         </div>
+                       
                         <div class="form-group">
-                            <label for="content">Post Content</label>
-                            <textarea
-                                name="content"
-                                class="form-control"
-                                id="content"
-                                placeholder="{{ $post->content }}"
-                                required
-                            >{{ $post->content }}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category</label>
+                            <label for="blood_type">Blood Type</label>
                             <select
-                                name="category_id"
+                                name="blood_type_id"
                                 class="form-control"
-                                id="category"
+                                id="blood_type"
                                 required
                             >
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ $post->category_id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
+                                @foreach($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}"
+                                        {{ $donationRequest->blood_type_id == $bloodType->id ? 'selected' : '' }}>
+                                        {{ $bloodType->name }}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="latitude">Latitude</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->latitude }}"
+                                name="latitude"
+                                class="form-control"
+                                id="latitude"
+                                placeholder="{{ $donationRequest->latitude }}"
+                                required
+                            >
+                        </div>
+                         <div class="form-group">
+                            <label for="longitude">Longitude</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->longitude }}"
+                                name="longitude"
+                                class="form-control"
+                                id="longitude"
+                                placeholder="{{ $donationRequest->longitude }}"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <select
+                                name="city_id"
+                                class="form-control"
+                                id="city"
+                                required
+                            >
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}"
+                                        {{ $donationRequest->city_id == $city->id ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude">Phone</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->phone }}"
+                                name="phone"
+                                class="form-control"
+                                id="phone"
+                                placeholder="{{ $donationRequest->phone }}"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->notes }}"
+                                name="notes"
+                                class="form-control"
+                                id="notes"
+                                placeholder="{{ $donationRequest->notes }}"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="hospital_name">Hospital Name</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->hospital_name }}"
+                                name="hospital_name"
+                                class="form-control"
+                                id="hospital_name"
+                                placeholder="{{ $donationRequest->hospital_name }}"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="bags_number">Bags Number</label>
+                            <input
+                                type="text"
+                                value="{{ $donationRequest->bags_number }}"
+                                name="bags_number"
+                                class="form-control"
+                                id="bags_number"
+                                placeholder="{{ $donationRequest->bags_number }}"
+                                required
+                            >
+                        </div>
                     </div>
 
                     <div class="card-footer">

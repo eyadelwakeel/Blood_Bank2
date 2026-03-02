@@ -50,7 +50,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // posts routes
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
         // donation requests routes
-        Route::resource('donation_requests', \App\Http\Controllers\Admin\DonationRequestController::class);
+        Route::resource('donation-requests', \App\Http\Controllers\Admin\DonationRequestController::class);
 });
 
 /*

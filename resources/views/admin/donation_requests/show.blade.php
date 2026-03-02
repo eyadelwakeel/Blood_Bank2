@@ -55,7 +55,7 @@
 
             
         </div>
-        <a href="{{url(route('admin.donation_requests.index'))}}" class="btn btn-secondary">
+        <a href="{{url(route('admin.donation-requests.index'))}}" class="btn btn-secondary">
                 Back
             </a>
     </div>

@@ -26,7 +26,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <a href="{{ route('admin.donation_requests.create') }}" class="btn btn-primary mb-3">Create Donation Request</a>
+                    <a href="{{ route('admin.donation-requests.create') }}" class="btn btn-primary mb-3">Create Donation Request</a>
                     @include('admin.layouts.partials.flash_messages')
                     <table class="table table-bordered">
                         <thead>
@@ -50,18 +50,18 @@
                                 <td>
                                 
                                     <div class="btn-group">
-                                        <a href="{{ route('admin.donation_requests.edit', $donationRequest->id) }}"
+                                        <a href="{{ route('admin.donation-requests.edit', $donationRequest->id) }}"
                                             class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.edit')
                                         </a>
-                                        <a href="{{ route('admin.donation_requests.show', $donationRequest->id) }}"
+                                        <a href="{{ route('admin.donation-requests.show', $donationRequest->id) }}"
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-eye"></i>
                                             @lang('messages.view')
                                         </a>
 
-                                        <form action="{{ route('admin.donation_requests.destroy', $donationRequest->id) }}"
+                                        <form action="{{ route('admin.donation-requests.destroy', $donationRequest->id) }}"
                                             method="POST"
                                             style="display: inline-block;">
                                             @csrf

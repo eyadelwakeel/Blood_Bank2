@@ -23,8 +23,14 @@ class DonationsRequest extends FormRequest
     {
         return [
             //
+
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:0',
+            'blood_type_id' => 'required|exists:blood_types,id',
+            'city_id' => 'required|exists:cities,id',
+            //'user_id' => 'required|exists:users,id',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
             'phone' => 'required|string|max:255',
             'hospital_name' => 'required|string|max:255',
             'bags_number' => 'required|integer|min:1',
