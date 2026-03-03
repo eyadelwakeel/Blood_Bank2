@@ -62,6 +62,8 @@ public function index(Request $request)
     public function show(string $id)
     {
         //
+        $user = User::with(['city.governorate', 'bloodType'])->findOrFail($id);
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -90,12 +92,15 @@ public function index(Request $request)
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
-    public function toggle($id)
-    {
-        $user = User::findOrFail($id);
-        $user->is_active = !$user->is_active;
-        $user->save();
+    
+    // Toggle user active status
 
-        return redirect()->route('admin.users.index')->with('success', 'User status updated successfully.');
+    public function toggle(User $user)
+    {
+        $user->update([
+            'is_active' => !$user->is_active
+        ]);
+
+        return back()->with('success', 'User status updated successfully.');
     }
 }
