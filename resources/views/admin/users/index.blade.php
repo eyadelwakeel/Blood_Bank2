@@ -30,9 +30,10 @@
                     @include('admin.layouts.partials.flash_messages')
                     <form method="GET" action="{{ route('admin.users.index') }}" class="mb-3">
                         <div class="row">
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <select name="governorate_id" class="form-control">
-                                    <option value="">-- اختر المحافظة --</option>
+                                    <option value="">ٍSelect Governorate</option>
                                     @foreach($governorates as $governorate)
                                     <option value="{{ $governorate->id }}"
                                         {{ request('governorate_id') == $governorate->id ? 'selected' : '' }}>
@@ -42,9 +43,35 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-primary">Governorate Filter</button>
+                            <div class="col-md-3">
+                                <select name="city_id" class="form-control">
+                                    <option value="">Select City</option>
+                                    @foreach($cities as $city)
+                                    <option value="{{ $city->id }}"
+                                        {{ request('city_id') == $city->id ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
+
+                            <div class="col-md-3">
+                                <select name="blood_type_id" class="form-control">
+                                    <option value="">-- Select Blood Type --</option>
+                                    @foreach($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}"
+                                        {{ request('blood_type_id') == $bloodType->id ? 'selected' : '' }}>
+                                        {{ $bloodType->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Reset</a>
+                            </div>
+
                         </div>
                     </form>
 
@@ -56,6 +83,7 @@
                                 <th>City</th>
                                 <th>Governorate</th>
                                 <th>Phone</th>
+                                <th>Blood Type</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -68,6 +96,7 @@
                                 <td>{{ $user->city?->name }}</td>
                                 <td>{{ $user->city?->governorate?->name }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>{{ $user->bloodType?->name }}</td>
                                 <td>
                                     @if($user->is_active)
                                     <span class="badge badge-success mr-2">Active</span>
@@ -91,6 +120,10 @@
 
                                 <td>
                                     <div class="btn-group">
+                                        <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                            @lang('messages.show')
+                                        </a>
                                         <!-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.edit')

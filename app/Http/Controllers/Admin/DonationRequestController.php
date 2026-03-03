@@ -17,13 +17,24 @@ class DonationRequestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $donationRequests = DonationRequest::paginate(10);
-        
-        return view('admin.donation_requests.index', compact('donationRequests'));
-    }
+   public function index(Request $request)
+{
+   $cities = City::all();
+    $bloodTypes = BloodType::all();
+
+    $donationRequests = DonationRequest::with(['city', 'bloodType'])
+        ->when($request->city_id, function ($query) use ($request) {
+            $query->where('city_id', $request->city_id);
+        })
+        ->when($request->blood_type_id, function ($query) use ($request) {
+            $query->where('blood_type_id', $request->blood_type_id);
+        })
+        ->paginate(10)
+        ->withQueryString(); 
+
+    return view('admin.donation_requests.index', compact('donationRequests', 'cities', 'bloodTypes'));
+
+}
 
     /**
      * Show the form for creating a new resource.

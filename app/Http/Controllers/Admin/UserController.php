@@ -6,47 +6,38 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Governorate;
+use App\Models\City;
+use App\Models\BloodType;
+
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-//     public function index()
-//     {
-//         //
-//         $users = User::paginate(10);
-//         $governorates = Governorate::all();
-//         return view('admin.users.index',compact('users', 'governorates'));
-//     }
-//     public function filter_governorate(Request $request)
-// {
-//     $users = User::with(['city.governorate'])
-//         ->when($request->governorate_id, function ($query) use ($request) {
-//             $query->whereHas('city', function ($q) use ($request) {
-//                 $q->where('governorate_id', $request->governorate_id);
-//             });
-//         })
-//         ->paginate(10);
-
-//     $governorates = Governorate::all();
-
-//     return view('admin.users.index', compact('users', 'governorates'));
-// }
-
+//    
 public function index(Request $request)
 {
-    $users = User::with(['city.governorate'])
+    $governorates = Governorate::all();
+    $cities = City::all();
+    $bloodTypes = BloodType::all();
+
+    $users = User::with(['city.governorate', 'bloodType'])
         ->when($request->governorate_id, function ($query) use ($request) {
             $query->whereHas('city', function ($q) use ($request) {
                 $q->where('governorate_id', $request->governorate_id);
             });
         })
-        ->paginate(10);
+        ->when($request->city_id, function ($query) use ($request) {
+            $query->where('city_id', $request->city_id);
+        })
+        ->when($request->blood_type_id, function ($query) use ($request) {
+            $query->where('blood_type_id', $request->blood_type_id);
+        })
+        ->paginate(10)
+        ->withQueryString(); 
 
-    $governorates = Governorate::all();
-
-    return view('admin.users.index', compact('users', 'governorates'));
+    return view('admin.users.index', compact('users', 'governorates', 'cities', 'bloodTypes'));
 }
 
     /**

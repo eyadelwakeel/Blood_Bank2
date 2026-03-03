@@ -11,6 +11,7 @@ return [
     'governorates_list' => 'Governorates List',
     'name' => 'Name',
     'edit' => 'Edit',
+    'show' => 'Show',
     'delete' => 'Delete',
     'create' => 'Create',
     'submit' => 'Submit',

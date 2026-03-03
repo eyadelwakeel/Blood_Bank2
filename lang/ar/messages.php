@@ -11,6 +11,7 @@ return [
     'governorates_list' => 'قائمة المحافظات',
     'name' => 'الاسم',
     'edit' => 'تعديل',
+    'show' => 'عرض',
     'delete' => 'حذف',
     'create' => 'إنشاء',
     'submit' => 'إرسال',

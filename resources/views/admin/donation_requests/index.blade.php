@@ -28,11 +28,41 @@
                 <div class="card-body">
                     <a href="{{ route('admin.donation-requests.create') }}" class="btn btn-primary mb-3">Create Donation Request</a>
                     @include('admin.layouts.partials.flash_messages')
+                    <form method="GET" action="{{ route('admin.donation-requests.index') }}" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select name="city_id" class="form-select">
+                                    <option value="">-- Filter By City --</option>
+                                    @foreach($cities as $city)
+                                    <option value="{{ $city->id }}" {{ request('city_id') == $city->id ? 'selected' : '' }}>
+                                        {{ $city->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <select name="blood_type_id" class="form-select">
+                                    <option value="">-- Filter By Blood Type --</option>
+                                    @foreach($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}" {{ request('blood_type_id') == $bloodType->id ? 'selected' : '' }}>
+                                        {{ $bloodType->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                                <a href="{{ route('admin.donation-requests.index') }}" class="btn btn-secondary">Reset</a>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                               
+
                                 <th>Blood Type</th>
                                 <th>City</th>
                                 <th>Phone</th>
@@ -48,7 +78,7 @@
                                 <td>{{ $donationRequest->city->name }}</td>
                                 <td>{{ $donationRequest->phone }}</td>
                                 <td>
-                                
+
                                     <div class="btn-group">
                                         <a href="{{ route('admin.donation-requests.edit', $donationRequest->id) }}"
                                             class="btn btn-info btn-sm">
@@ -58,7 +88,7 @@
                                         <a href="{{ route('admin.donation-requests.show', $donationRequest->id) }}"
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-eye"></i>
-                                            @lang('messages.view')
+                                            @lang('messages.show')
                                         </a>
 
                                         <form action="{{ route('admin.donation-requests.destroy', $donationRequest->id) }}"
@@ -74,7 +104,7 @@
                                                 @lang('messages.delete')
                                             </button>
                                         </form>
-                                        
+
                                     </div>
 
                                 </td>
