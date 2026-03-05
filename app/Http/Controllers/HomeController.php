@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Governorate;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\DonationRequest;
+use App\Models\Post;
+use App\Models\City;
+use App\Models\BloodType;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $usersCount = User::count();
+        $donationRequestsCount = DonationRequest::count();
+        $postsCount =  Post::count();
+        $governoratesCount = Governorate::count();
+        $citiesCount = City::count();
+        $bloodTypesCount = BloodType::count();
+        
+        return view('admin.home', compact('usersCount', 'donationRequestsCount', 'postsCount', 'governoratesCount', 'citiesCount', 'bloodTypesCount'));
     }
 }
