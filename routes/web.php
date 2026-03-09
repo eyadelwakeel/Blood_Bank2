@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SettingController;
 
 
 Route::get('/', function () {
@@ -51,6 +53,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
         // donation requests routes
         Route::resource('donation-requests', \App\Http\Controllers\Admin\DonationRequestController::class);
+        
+
+        Route::resource('admins',AdminController::class);
+            Route::get('/admin/profile', [AdminController::class, 'edit'])->name('profile.edit');
+            Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
+
+        // settings routes
+        Route::resource('settings',SettingController::class);
+        Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
+        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+        
 });
 
 /*
