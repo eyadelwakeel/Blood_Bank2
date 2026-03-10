@@ -48,7 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
 
         // categories routes
-        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);});
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
         // posts routes
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
         // donation requests routes
@@ -60,10 +60,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
 
         // settings routes
-        Route::resource('settings',SettingController::class);
-        Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
-        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+        // Route::resource('settings',SettingController::class);
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('/settings/edit', [SettingController::class, 'edit'])->name('settings.edit');
+        Route::match(['POST', 'PUT'], '/settings/edit', [SettingController::class, 'update'])->name('settings.update');
         
+    });
 });
 
 /*

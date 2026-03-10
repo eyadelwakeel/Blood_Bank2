@@ -19,61 +19,71 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Settings</h3>
+        <div class="col-md-8 mx-auto">
+
+            <div class="card card-primary">
+
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">App Settings</h3>
+
+                    <a href="{{ route('admin.settings.edit') }}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
                 </div>
-                <!-- /.card-header -->
+
                 <div class="card-body">
-                    <a href="{{ route('admin.settings.edit') }}" class="btn btn-primary mb-3">Edit Settings</a>
+
                     @include('admin.layouts.partials.flash_messages')
-                    
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>phone</th>
-                                <th>email</th>
-                                <th>Facebook</th>
-                                <th>Twitter</th>
-                                <th>App Store</th>
-                                <th>YouTube</th>
-                                <th>About App</th>
-                            </tr>
-                        </thead>
+
+                   
+
+                    <table class="table table-striped table-hover">
                         <tbody>
-                           
+
                             <tr>
-                                <td>{{ $settings->first()->phone }}</td>
-                                <td>{{ $settings->first()->email }}</td>
-                                <td>{{ $settings->first()->fb_url }}</td>
-                                <td>{{ $settings->first()->x_url }}</td>
-                                <td>{{ $settings->first()->app_store_url }}</td>
-                                <td>{{ $settings->first()->youtube_url }}</td>
-                                <td>{{ $settings->first()->about_app }}</td>
-                                
+                                <th width="30%">📞 Phone</th>
+                                <td>{{ $settings->phone ?? '-' }}</td>
                             </tr>
 
+                            <tr>
+                                <th>📧 Email</th>
+                                <td>{{ $settings->email ?? '-' }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>📘 Facebook</th>
+                                <td>{{ $settings->email ?? '-' }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>🐦 Twitter</th>
+                                <td>{{ $settings->x_url ?? '-' }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>🍎 App Store</th>
+                                <td>{{ $settings->app_store_url ?? '-' }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>▶️ YouTube</th>
+                                <td>{{ $settings->youtube_url ?? '-' }}</td>
+                            </tr>
+
+                            <tr>
+                                <th>📱 About App</th>
+                                <td>{{ $settings->about_app ?? '-' }}</td>
+                            </tr>
 
                         </tbody>
                     </table>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer clearfix">
-                    {{ $users->appends(request()->query())->links() }}
 
                 </div>
 
-                <a href="{{ route('admin.settings.edit') }}" class="btn btn-primary mb-3">Edit Settings</a>
             </div>
-            <!-- /.card -->
-
 
         </div>
-
-
     </div>
-    <!-- /.row -->
-</div><!-- /.container-fluid -->
+</div>
 
 @endsection

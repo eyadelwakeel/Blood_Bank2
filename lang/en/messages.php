@@ -25,6 +25,13 @@ return [
     'settings' => 'Settings',
     'logout' => 'Logout',
     'donation_requests' => 'Donation Requests',
+    'phone' => 'Phone',
+    'email' => 'Email',
+    'fb_url' => 'Facebook URL',
+    'x_url' => 'Twitter URL',
+    'app_store_url' => 'App Store URL',
+    'youtube_url' => 'YouTube URL',
+    'about_app' => 'About App',
     
 
 ];
