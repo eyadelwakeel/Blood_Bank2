@@ -40,17 +40,46 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" value="{{ $admin->name }}" class="form-control" id="name" placeholder="Enter name" required>
+                            <input type="text" name="name" value="{{ old('name', $admin->name) }}" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter name" required>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" value="{{ $admin->email }}" class="form-control" id="email" placeholder="Enter email" required>
+                            <input type="email" name="email" value="{{ old('email', $admin->email) }}" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" required>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="current_password">Current Password</label>
+                            <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" placeholder="Enter current password">
+                            @error('current_password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="password">New Password</label>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter new password (leave blank to keep current)">
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter new password (leave blank to keep current)">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Confirm new password">
                         </div>
                     </div>
 

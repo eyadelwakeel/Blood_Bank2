@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
+
 
 class AdminController extends Controller
 {
@@ -23,21 +25,36 @@ class AdminController extends Controller
         return view('admin.profile', compact('admin'));
     }
 
-    public function update(Request $request)
-    {
-        /** @var \App\Models\Admin $admin */
-        $admin = Auth::guard('admin')->user();
 
-        $admin->fill([
-            'name' => $request->name,
-            'email' => $request->email,
-        ])->save();
+public function update(Request $request)
+{
+    /** @var \App\Models\Admin $admin */
+    $admin = Auth::guard('admin')->user();
 
-        if ($request->password) {
-            $admin->password = Hash::make($request->password);
-            $admin->save();
-        }
 
-        return redirect()->back()->with('success','Profile Updated');
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:admins,email,' . $admin->id,
+        'current_password' => ['nullable', 'required_with:password', function ($attribute, $value, $fail) use ($admin) {
+            if ($value && !Hash::check($value, $admin->password)) {
+                $fail('Current password is incorrect');
+            }
+        }],
+        'password' => 'nullable|min:6|confirmed'
+    ]);
+
+    $admin->update([
+        'name' => $request->name,
+        'email' => $request->email,
+    ]);
+
+    // تغيير الباسورد
+    if ($request->filled('password')) {
+        $admin->update([
+            'password' => Hash::make($request->password)
+        ]);
     }
+
+    return redirect()->back()->with('success','Profile Updated');
+}
 }
