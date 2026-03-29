@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
 <!-- AdminLTE -->
-<link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
 
 
 
@@ -94,11 +94,11 @@
     <!-- /.login-box -->
 
     <!-- jQuery -->
-    <script src="{{ asset('adminlte')}}/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('adminlte')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('adminlte')}}/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>

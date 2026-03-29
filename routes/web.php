@@ -8,16 +8,20 @@ use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\website\HomeController;
 
+// Website Routes
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['as' => 'website.'],function () {
+    Route::get('/', HomeController::class . '@index')->name('home');
 });
+
+
 
 
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| Admin Routes (Dashboard)
 |--------------------------------------------------------------------------
 */
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -75,6 +79,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
 */
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->middleware('auth')
-    ->name('home');
