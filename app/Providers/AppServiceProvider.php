@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
+use App\Models\Setting;
+use App\Models\Category;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -23,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
          Paginator::useBootstrapFour();
+
+         View::composer('website.*', function($view){
+            $view
+            ->with(['settings' => Setting::firstOrFail(),'categories' =>Category::all()]);
+         });
     }
 }

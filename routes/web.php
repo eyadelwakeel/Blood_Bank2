@@ -19,23 +19,17 @@ Route::group(['as' => 'website.'],function () {
 
 
 
-/*
-|--------------------------------------------------------------------------
-| Admin Routes (Dashboard)
-|--------------------------------------------------------------------------
-*/
+
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // صفحة تسجيل الدخول
     Route::get('/login', function () {
         return view('auth.login');
     })->name('login')->middleware('guest:admin');
 
-    // تنفيذ تسجيل الدخول
     Route::post('/login', [LoginController::class, 'login'])
         ->name('login.submit')->middleware('guest:admin');
-    // تسجيل الخروج
-    Route::post('/logout', function () {
+
+        Route::post('/logout', function () {
         Auth::guard('admin')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -63,8 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/admin/profile', [AdminController::class, 'edit'])->name('profile.edit');
             Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
 
-        // settings routes
-        // Route::resource('settings',SettingController::class);
+        
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::get('/settings/edit', [SettingController::class, 'edit'])->name('settings.edit');
         Route::match(['POST', 'PUT'], '/settings/edit', [SettingController::class, 'update'])->name('settings.update');
@@ -72,10 +65,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-/*
-|--------------------------------------------------------------------------
-| User Routes
-|--------------------------------------------------------------------------
-*/
 Auth::routes();
 

@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Governorates List </li>
+                <li class="breadcrumb-item active">Categories List </li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -23,38 +23,24 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h3 class="card-title">@lang('messages.create')</h3>
+                    <h3 class="card-title">@lang('messages.create') Category</h3>
                 </div>
 
-                <form action="{{ route('admin.governorates.store') }}" method="POST">
+                <form action="{{ route('admin.categories.store') }}" method="POST">
                     @csrf
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Governorate Name</label>
+                            <label for="name">Category Name</label>
                             <input
                                 type="text"
                                 name="name"
                                 class="form-control"
                                 id="name"
-                                placeholder="Enter governorate name"
+                                placeholder="Enter category name"
                                 required
                             >
 
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Select Governorate</label>
-                            <select
-                                name="country_id"
-                                class="form-control"
-                                id="country_id"
-                                required
-                                >
-                                @foreach($governorates as $governorate)
-                                    <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
-                                @endforeach
-                            </select>
-                            
                         </div>
                     </div>
 

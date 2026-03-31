@@ -4,12 +4,14 @@ namespace App\Http\Controllers\website;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
     //
     public function index()
     {
-        return view('website.home');
+        $posts = Post::latest()->take(9)->get();
+        return view('website.home', compact('posts'));
     }
 }

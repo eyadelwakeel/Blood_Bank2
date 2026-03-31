@@ -87,15 +87,12 @@ class PostController extends Controller
 
     $data = $request->except('photo');
 
-    // لو فيه صورة جديدة
     if ($request->hasFile('photo')) {
 
-        // حذف الصورة القديمة
         if ($post->photo && file_exists(public_path('posts/' . $post->photo))) {
             unlink(public_path('posts/' . $post->photo));
         }
 
-        // حفظ الصورة الجديدة
         $photoName = time() . '.' . $request->photo->extension();
         $request->photo->move(public_path('posts'), $photoName);
 

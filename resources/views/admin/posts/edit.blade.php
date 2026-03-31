@@ -26,7 +26,7 @@
                     <h3 class="card-title">@lang('messages.edite')</h3>
                 </div>
 
-                <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+                <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
@@ -39,8 +39,7 @@
                                 class="form-control"
                                 id="title"
                                 placeholder="{{ $post->title }}"
-                                required
-                            >
+                                required>
 
                         </div>
                         <div class="form-group">
@@ -50,8 +49,7 @@
                                 class="form-control"
                                 id="content"
                                 placeholder="{{ $post->content }}"
-                                required
-                            >{{ $post->content }}</textarea>
+                                required>{{ $post->content }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
@@ -59,15 +57,26 @@
                                 name="category_id"
                                 class="form-control"
                                 id="category"
-                                required
-                            >
+                                required>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ $post->category_id == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
+                                <option value="{{ $category->id }}"
+                                    {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Post Photo</label>
+                            <input
+                                type="file"
+                                name="photo"
+                                class="form-control"
+                                id="photo"
+                            >@if($post->photo)
+                            <img src="{{ asset('posts/' . $post->photo) }}" alt="Post Photo" width="100">
+                            @endif
+                        </div>
                     </div>
 
                     <div class="card-footer">
@@ -85,4 +94,4 @@
 </div>
 
 
-    @endsection
+@endsection

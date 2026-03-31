@@ -24,6 +24,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('admin.categories.create');
     }
 
     /**
@@ -32,6 +33,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Category::create($request->all());
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category created successfully.');
+
     }
 
     /**
