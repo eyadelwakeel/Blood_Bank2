@@ -9,11 +9,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\website\HomeController;
+use App\Http\Controllers\website\PostController;
 
 // Website Routes
 
 Route::group(['as' => 'website.'],function () {
     Route::get('/', HomeController::class . '@index')->name('home');
+    Route::get('posts', PostController::class . '@posts')->name('posts');
 });
 
 
