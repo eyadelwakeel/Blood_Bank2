@@ -13,7 +13,7 @@
           <img src="{{ asset('adminlte') }}/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{ route('admin.profile.edit') }}" class="d-block">{{auth('admin')->user()->name}}</a>
+          <a href="{{ route('admin.admins.edit', auth('admin')->user()->id) }}" class="d-block">{{auth('admin')->user()->name}}</a>
         </div>
       </div>
 

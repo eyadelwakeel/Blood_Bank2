@@ -37,7 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('logout');
 
     // Dashboard
-    Route::middleware('admin')->group(function () {
+    Route::middleware('auth:admin')->group(function () {
         Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
         // governorates routes
         Route::resource('governorates', GoveroratController::class);
@@ -54,8 +54,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
 
         Route::resource('admins',AdminController::class);
-            Route::get('/admin/profile', [AdminController::class, 'edit'])->name('profile.edit');
-            Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
+            // Route::get('/admin/profile', [AdminController::class, 'edit'])->name('profile.edit');
+            // Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
 
         
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

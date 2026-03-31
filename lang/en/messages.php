@@ -32,6 +32,10 @@ return [
     'app_store_url' => 'App Store URL',
     'youtube_url' => 'YouTube URL',
     'about_app' => 'About App',
+    'contact_email' => 'Contact Email',
+    'contact_phone' => 'Contact Phone',
+    'contact_address' => 'Contact Address',
+    'Back' => 'Back',
     
 
 ];

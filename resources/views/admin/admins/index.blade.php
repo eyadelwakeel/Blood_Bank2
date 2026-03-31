@@ -48,10 +48,12 @@
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>
-                                    @if(auth()->id() != $admin->id)
+                                    @if(auth()->id() == $admin->id)
                                     <a href="{{ route('admin.admins.edit', $admin->id) }}" class="btn btn-warning btn-sm">
                                         Edit
                                     </a>
+                                    @else
+                                    <button class="btn btn-sm btn-secondary" disabled>Restricted</button>
                                     @endif
                                 </td>
                             </tr>

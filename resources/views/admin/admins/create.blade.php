@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Governorates List </li>
+                <li class="breadcrumb-item active">Create Admin</li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -26,12 +26,12 @@
                     <h3 class="card-title">@lang('messages.create')</h3>
                 </div>
 
-                <form action="{{ route('admin.governorates.store') }}" method="POST">
+                <form action="{{ route('admin.admins.store') }}" method="POST">
                     @csrf
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Governorate Name</label>
+                            <label for="name">Admin Name</label>
                             <input
                                 type="text"
                                 name="name"
@@ -43,20 +43,40 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="name">Select Governorate</label>
-                            <select
-                                name="country_id"
+                            <label for="email">Admin Email</label>
+                            <input
+                                type="email"
+                                name="email"
                                 class="form-control"
-                                id="country_id"
+                                id="email"
+                                placeholder="Enter admin email"
                                 required
-                                >
-                                @foreach($governorates as $governorate)
-                                    <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
-                                @endforeach
-                            </select>
-                            
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Admin Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                class="form-control"
+                                id="password"
+                                placeholder="Enter admin password"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input
+                                type="password"
+                                name="password_confirmation"
+                                class="form-control"
+                                id="password_confirmation"
+                                placeholder="Confirm admin password"
+                                required
+                            >
                         </div>
                     </div>
+
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">

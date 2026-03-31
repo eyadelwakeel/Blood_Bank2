@@ -14,12 +14,7 @@
                                 <a href="{{ $settings->fb_url }}" class="facebook"><i class="fab fa-facebook-f"></i></a>
                                 <a href="{{ $settings->instagram_url }}" class="instagram"><i class="fab fa-instagram"></i></a>
                                 <a href="{{ $settings->x_url }}" class="twitter"><i class="fab fa-twitter"></i></a>
-<<<<<<< Updated upstream
                                 <a href="{{ 'https://wa.me/'.$settings->phone }}" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-=======
-                                <a href="{{ $settings->youtube_url }}" class="youtube"><i class="fab fa-youtube"></i></a>
-                                <a href="{{ $settings->phone }}" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
->>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>

@@ -32,5 +32,9 @@ return [
     'app_store_url' => 'رابط متجر التطبيقات',
     'youtube_url' => 'رابط يوتيوب',
     'about_app' => 'عن التطبيق',
+    'contact_email' => 'البريد الإلكتروني للتواصل',
+    'contact_phone' => 'رقم الهاتف للتواصل',
+    'contact_address' => 'العنوان للتواصل',
+    'Back' => 'رجوع',
 
 ];

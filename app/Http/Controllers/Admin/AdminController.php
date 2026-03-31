@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 
 
+
 class AdminController extends Controller
 {
     public function index()
@@ -22,39 +23,68 @@ class AdminController extends Controller
     {
         $admin = Auth::guard('admin')->user();
 
-        return view('admin.profile', compact('admin'));
+        return view('admin.admins.edit', compact('admin'));
+    }
+    public function create()
+    {
+        return view('admin.admins.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        Admin::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.admins.index')->with('success', 'Admin Created');
     }
 
 
 public function update(Request $request)
 {
     /** @var \App\Models\Admin $admin */
-    $admin = Auth::guard('admin')->user();
 
+    $admin = Auth::guard('admin')->user();
 
     $request->validate([
         'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:admins,email,' . $admin->id,
-        'current_password' => ['nullable', 'required_with:password', function ($attribute, $value, $fail) use ($admin) {
-            if ($value && !Hash::check($value, $admin->password)) {
-                $fail('Current password is incorrect');
-            }
-        }],
-        'password' => 'nullable|min:6|confirmed'
+        'password' => 'nullable|min:6|confirmed',
     ]);
 
-    $admin->update([
-        'name' => $request->name,
-        'email' => $request->email,
-    ]);
-
-    // تغيير الباسورد
-    if ($request->filled('password')) {
-        $admin->update([
-            'password' => Hash::make($request->password)
+    if (
+        $request->name !== $admin->name ||
+        $request->filled('password')
+    ) {
+        $request->validate([
+            'current_password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($admin) {
+                    if (!Hash::check($value, $admin->password)) {
+                        $fail('Current password is incorrect');
+                    }
+                }
+            ]
         ]);
     }
 
-    return redirect()->back()->with('success','Profile Updated');
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+    ];
+
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
+    }
+
+    $admin->update($data);
+
+    return redirect()->back()->with('success', 'Profile Updated');
 }
 }
