@@ -24,7 +24,7 @@
         
         <title>Blood Bank</title>
     </head>
-    <body>
+    <body class="{{  $bodyClass ?? '' }}" >
 
         @include('website.layouts.sections._upper_bar')
         

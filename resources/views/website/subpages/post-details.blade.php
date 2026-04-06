@@ -1,3 +1,4 @@
+@extends('website.layout')
 <!doctype html>
 <html lang="en" dir="rtl">
     <head>

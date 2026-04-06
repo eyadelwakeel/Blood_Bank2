@@ -8,14 +8,31 @@ use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\website\HomeController;
-use App\Http\Controllers\website\PostController;
+use App\Http\Controllers\Website\HomeController;
+use App\Http\Controllers\Website\PostController;
+use App\Http\Controllers\Website\Auth\LoginController as WebsiteLoginController;
 
 // Website Routes
 
-Route::group(['as' => 'website.'],function () {
-    Route::get('/', HomeController::class . '@index')->name('home');
-    Route::get('posts', PostController::class . '@posts')->name('posts');
+Route::get('/', [HomeController::class, 'index'])->name('website.home');
+
+Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
+], function () {
+
+
+    Route::get('posts', [PostController::class, 'posts'])->name('posts');
+
+    Route::get('posts/{post}', [PostController::class, 'postDetails'])->name('posts.details');
+
+    Route::get('login', [WebsiteLoginController::class, 'showLoginForm'])
+        ->name('login')
+        ->middleware('guest:web');
+        
+    Route::post('login', [WebsiteLoginController::class, 'login'])
+        ->name('login.submit')
+        ->middleware('guest:web');
+    Route::post('logout', [WebsiteLoginController::class, 'logout'])->name('logout')->middleware('auth:web');
+
 });
 
 
@@ -35,7 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Auth::guard('admin')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     })->name('logout');
 
     // Dashboard
