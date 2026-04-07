@@ -8,12 +8,15 @@ use App\Http\Requests\Website\loginRequest;
 
 class LoginController extends Controller
 {
-    //
+    
+
+    
     public function showLoginForm()
     {
         return view('website.subpages.auth.login');
     }  
 
+    
     public function login(loginRequest $request)
     {
         $credentials = $request->only('phone', 'password');
@@ -21,7 +24,7 @@ class LoginController extends Controller
         $remember = $request->has('remember');
 
         if (auth()->guard('web')->attempt($credentials, $remember)) {
-            return redirect()->intended(route('website.home'));
+            return redirect()->route('website.home');
         }
 
         return back()->withErrors([

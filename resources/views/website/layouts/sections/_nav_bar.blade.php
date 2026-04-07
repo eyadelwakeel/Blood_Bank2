@@ -32,7 +32,7 @@
                         
                         <!--not a member-->
                         <div class="accounts">
-                            <a href="create-account.html" class="create">إنشاء حساب جديد</a>
+                            <a href="{{ route('website.register') }}" class="create">إنشاء حساب جديد</a>
                             <a href="{{ route('website.login') }}" class="signin">الدخول</a>
                         </div>
                         

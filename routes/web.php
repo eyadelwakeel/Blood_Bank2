@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\PostController;
 use App\Http\Controllers\Website\Auth\LoginController as WebsiteLoginController;
+use App\Http\Controllers\Website\Auth\RegisterController;
 
 // Website Routes
 
@@ -24,15 +25,22 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
 
     Route::get('posts/{post}', [PostController::class, 'postDetails'])->name('posts.details');
 
+    //login routes
     Route::get('login', [WebsiteLoginController::class, 'showLoginForm'])
-        ->name('login')
-        ->middleware('guest:web');
+        ->name('login');
         
     Route::post('login', [WebsiteLoginController::class, 'login'])
-        ->name('login.submit')
-        ->middleware('guest:web');
+        ->name('login.submit');
     Route::post('logout', [WebsiteLoginController::class, 'logout'])->name('logout')->middleware('auth:web');
 
+    //register routes
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])
+        ->name('register');
+    Route::post('register', [RegisterController::class, 'register'])
+        ->name('register.submit');
+
+        // get cities by governorate
+    Route::get('/cities/{governorate}', [RegisterController::class, 'getCities'])->name('cities');
 });
 
 

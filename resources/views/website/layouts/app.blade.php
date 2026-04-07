@@ -24,6 +24,8 @@
         
         <title>Blood Bank</title>
     </head>
+
+
     <body class="{{  $bodyClass ?? '' }}" >
 
         @include('website.layouts.sections._upper_bar')
@@ -91,7 +93,7 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         
         <script src="{{ asset('website/assets/js/bootstrap.bundle.js') }}"></script>
         <script src="{{ asset('website/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -103,5 +105,11 @@
         <script src="{{ asset('website/assets/js/owl.carousel.min.js') }}"></script>
         
         <script src="{{ asset('website/assets/js/main.js') }}"></script>
+
+
+        @yield('scripts')
+
     </body>
+
+
 </html>

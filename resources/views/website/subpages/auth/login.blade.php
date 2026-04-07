@@ -2,9 +2,8 @@
 
 
 @section('content')
-  
-      <!--form-->
-    <div class="form">
+
+<div class="form">
     <div class="container">
         <div class="path">
             <nav aria-label="breadcrumb">
@@ -15,7 +14,17 @@
             </nav>
         </div>
         <div class="signin-form">
-            <!-- الفورم هنا -->
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            
             <form action="{{ route('website.login.submit') }}" method="POST">
                 @csrf
                 <div class="logo">
