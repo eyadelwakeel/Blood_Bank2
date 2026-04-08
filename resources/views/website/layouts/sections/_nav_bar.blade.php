@@ -20,7 +20,7 @@
                                 <a class="nav-link" href="#">المقالات</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="donation-requests.html">طلبات التبرع</a>
+                                <a class="nav-link" href="{{ route('website.donation-requests') }}">طلبات التبرع</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="who-are-us.html">من نحن</a>

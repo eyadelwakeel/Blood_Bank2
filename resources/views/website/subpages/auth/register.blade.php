@@ -27,7 +27,7 @@
 
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="البريد الإلكترونى">
 
-                <input placeholder="تاريخ الميلاد" class="form-control" type="text" onfocus="(this.type='date')" id="birth_date" name="birth_date">
+                <input placeholder="تاريخ الميلاد" class="form-control" type="date" id="birth_date" name="birth_date">
 
                 <select class="form-control" id="blood_type" name="blood_type_id">
                     <option selected disabled hidden value="">فصيلة الدم</option>
@@ -49,7 +49,7 @@
 
                 <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" placeholder="رقم الهاتف">
 
-                <input placeholder="آخر تاريخ تبرع" class="form-control" type="text" onfocus="(this.type='date')" id="last_donation_date" name="last_donation_date">
+                <input placeholder="آخر تاريخ تبرع" class="form-control" type="date" id="last_donation_date" name="last_donation_date">
 
                 <input type="password" class="form-control" id="password" name="password" placeholder="كلمة المرور">
 

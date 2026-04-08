@@ -12,6 +12,7 @@ use App\Http\Controllers\Website\HomeController;
 use App\Http\Controllers\Website\PostController;
 use App\Http\Controllers\Website\Auth\LoginController as WebsiteLoginController;
 use App\Http\Controllers\Website\Auth\RegisterController;
+use App\Http\Controllers\Website\DonationRequestController;
 
 // Website Routes
 
@@ -41,6 +42,9 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
 
         // get cities by governorate
     Route::get('/cities/{governorate}', [RegisterController::class, 'getCities'])->name('cities');
+    // donation requests routes
+    Route::get('donation-requests', [DonationRequestController::class, 'index'])->name('donation-requests');
+    Route::get('donation-requests/{id}', [DonationRequestController::class, 'show'])->name('donation-requests.show');
 });
 
 

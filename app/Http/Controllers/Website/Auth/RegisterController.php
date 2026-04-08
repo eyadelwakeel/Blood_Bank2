@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Governorate;
 use App\Models\City;
 use App\Models\BloodType;
+use App\Http\Requests\Website\RegisterRequest as WebsiteRegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -30,7 +31,7 @@ class RegisterController extends Controller
         return response()->json($cities);
     }
 
-    public function register(RegisterRequest $request)
+    public function register(WebsiteRegisterRequest $request)
     {
        
         $data = $request->validated();
