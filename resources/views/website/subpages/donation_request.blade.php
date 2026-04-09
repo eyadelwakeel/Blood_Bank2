@@ -27,10 +27,9 @@
                             <div class="inside-select">
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر فصيلة الدم</option>
-                                    <option>+A</option>
-                                    <option>+B</option>
-                                    <option>+AB</option>
-                                    <option>-O</option>
+                                    @foreach ($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}">{{ $bloodType->name }}</option>
+                                    @endforeach
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
@@ -41,19 +40,18 @@
                             <div class="inside-select">
                                 <select class="form-control" id="exampleFormControlSelect1">
                                     <option selected disabled>اختر المدينة</option>
-                                    <option>المنصورة</option>
-                                    <option>القاهرة</option>
-                                    <option>الإسكندرية</option>
-                                    <option>سوهاج</option>
+                                    @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    @endforeach
                                 </select>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-1 search">
-                        <button type="submit">
+                        <a href="{{ route('website.donation-requests') }}" class="btn btn-secondary">
                             <i class="fas fa-search"></i>
-                        </button>
+                        </a>
                     </div>
                 </form>
                 <div class="patients">
@@ -65,7 +63,7 @@
                         </div>
                         <ul>
                             <li><span>اسم الحالة:</span> {{ $donationRequest->name }}</li>
-                            <li><span>مستشفى:</span> {{ $donationRequest->hospital }}</li>
+                            <li><span>مستشفى:</span> {{ $donationRequest->hospital_name }}</li>
                             <li><span>المدينة:</span> {{ $donationRequest->city->name }}</li>
                         </ul>
                         <a href="#">التفاصيل</a>

@@ -13,6 +13,7 @@ use App\Http\Controllers\Website\PostController;
 use App\Http\Controllers\Website\Auth\LoginController as WebsiteLoginController;
 use App\Http\Controllers\Website\Auth\RegisterController;
 use App\Http\Controllers\Website\DonationRequestController;
+use App\Http\Controllers\Website\GeneralController;
 
 // Website Routes
 
@@ -45,6 +46,11 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
     // donation requests routes
     Route::get('donation-requests', [DonationRequestController::class, 'index'])->name('donation-requests');
     Route::get('donation-requests/{id}', [DonationRequestController::class, 'show'])->name('donation-requests.show');
+
+    // general routes
+    Route::get('who-are-us', [GeneralController::class, 'whoAreUs'])->name('who-are-us');
+    Route::get('contact-us', [GeneralController::class, 'contactUs'])->name('contact-us');
+    Route::post('contact-us', [GeneralController::class, 'submitContactUs'])->name('contact-us.send');
 });
 
 
