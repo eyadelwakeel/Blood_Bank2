@@ -21,6 +21,7 @@ class DonationRequestController extends Controller
     public function index(Request $request)
 
     {
+        
         $cities = City::all();
         $bloodTypes = BloodType::all();
 
@@ -34,12 +35,7 @@ class DonationRequestController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        $donationRequests = DonationRequest::with('bloodType', 'city', 'user')->paginate(10);
         return view('website.subpages.donation_request', compact('donationRequests', 'cities', 'bloodTypes'));
     }
-    public function show($id)
-    {
-        $donationRequest = DonationRequest::with('bloodType', 'city','user')->findOrFail($id);
-        return view('website.subpages.donation_request', compact('donationRequest'));
-    }
+   
 }

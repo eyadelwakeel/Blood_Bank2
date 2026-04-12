@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\models\BloodType;
-use App\models\Citiy;
+use App\models\City;
 use App\models\Governorate;
 use App\Models\Setting;
 use App\Models\User;
@@ -39,7 +39,7 @@ class GeneralController extends Controller
     }
     public function cities(Request $request)
     {
-        $cities= Citiy::where(function($query) use ($request){
+        $cities= City::where(function($query) use ($request){
             if ($request->has('governorate_id'))
             {
                 $query->where('governorate_id',$request->governorate_id);
