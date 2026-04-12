@@ -1,31 +1,38 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\GoveroratController;
-use App\Http\Controllers\Admin\UserController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\auth;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Website\HomeController;
-use App\Http\Controllers\Website\PostController;
+use App\Http\Controllers\Admin\AdminController as AdminController;
+use App\Http\Controllers\Admin\DashboardController as DashboardController;
+use App\Http\Controllers\Admin\GoveroratController as GoveroratController;
+use App\Http\Controllers\Admin\UserController as UserController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\DonationRequestController as AdminDonationRequestController;
+use App\Http\Controllers\Admin\CityController as AdminCityController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+//website controllers
+use App\Http\Controllers\Website\HomeController as WebsiteHomeController;
+use App\Http\Controllers\Website\PostController as WebsitePostController;
 use App\Http\Controllers\Website\Auth\LoginController as WebsiteLoginController;
-use App\Http\Controllers\Website\Auth\RegisterController;
-use App\Http\Controllers\Website\DonationRequestController;
-use App\Http\Controllers\Website\GeneralController;
+use App\Http\Controllers\Website\Auth\RegisterController as WebsiteRegisterController;
+use App\Http\Controllers\Website\DonationRequestController as WebsiteDonationRequestController;
+use App\Http\Controllers\Website\GeneralController as WebsiteGeneralController;
+use App\Models\Admin;
 
 // Website Routes
 
-Route::get('/', [HomeController::class, 'index'])->name('website.home');
+Route::get('/', [WebsiteHomeController::class, 'index'])->name('website.home');
 
 Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
 ], function () {
 
 
-    Route::get('posts', [PostController::class, 'posts'])->name('posts');
+    Route::get('posts', [WebsitePostController::class, 'posts'])->name('posts');
 
-    Route::get('posts/{post}', [PostController::class, 'postDetails'])->name('posts.details');
+    Route::get('posts/{post}', [WebsitePostController::class, 'postDetails'])->name('posts.details');
 
     //login routes
     Route::get('login', [WebsiteLoginController::class, 'showLoginForm'])
@@ -36,21 +43,21 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
     Route::post('logout', [WebsiteLoginController::class, 'logout'])->name('logout')->middleware('auth:web');
 
     //register routes
-    Route::get('register', [RegisterController::class, 'showRegistrationForm'])
+    Route::get('register', [WebsiteRegisterController::class, 'showRegistrationForm'])
         ->name('register');
-    Route::post('register', [RegisterController::class, 'register'])
+    Route::post('register', [WebsiteRegisterController::class, 'register'])
         ->name('register.submit');
 
         // get cities by governorate
-    Route::get('/cities/{governorate}', [RegisterController::class, 'getCities'])->name('cities');
+    Route::get('/cities/{governorate}', [WebsiteRegisterController::class, 'getCities'])->name('cities');
     // donation requests routes
-    Route::get('donation-requests', [DonationRequestController::class, 'index'])->name('donation-requests');
-    Route::get('donation-requests/{id}', [DonationRequestController::class, 'show'])->name('donation-requests.show');
+    Route::get('donation-requests', [WebsiteDonationRequestController::class, 'index'])->name('donation-requests');
+    Route::get('donation-requests/{id}', [WebsiteDonationRequestController::class, 'show'])->name('donation-requests.show');
 
     // general routes
-    Route::get('who-are-us', [GeneralController::class, 'whoAreUs'])->name('who-are-us');
-    Route::get('contact-us', [GeneralController::class, 'contactUs'])->name('contact-us');
-    Route::post('contact-us', [GeneralController::class, 'submitContactUs'])->name('contact-us.send');
+    Route::get('who-are-us', [WebsiteGeneralController::class, 'whoAreUs'])->name('who-are-us');
+    Route::get('contact-us', [WebsiteGeneralController::class, 'contactUs'])->name('contact-us');
+    Route::post('contact-us', [WebsiteGeneralController::class, 'submitContactUs'])->name('contact-us.send');
 });
 
 
@@ -83,11 +90,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
 
         // categories routes
-        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+        Route::resource('categories', AdminCategoryController::class);
         // posts routes
-        Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+        Route::resource('posts', AdminPostController::class);
         // donation requests routes
-        Route::resource('donation-requests', \App\Http\Controllers\Admin\DonationRequestController::class);
+        Route::resource('donation-requests', AdminDonationRequestController::class);
+        // cities routes
+        Route::resource('cities', AdminCityController::class);
         
 
         Route::resource('admins',AdminController::class);
@@ -95,9 +104,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             // Route::post('/admin/profile', [AdminController::class, 'update'])->name('profile.update');
 
         
-        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::get('/settings/edit', [SettingController::class, 'edit'])->name('settings.edit');
-        Route::match(['POST', 'PUT'], '/settings/edit', [SettingController::class, 'update'])->name('settings.update');
+        Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
+        Route::get('/settings/edit', [AdminSettingController::class, 'edit'])->name('settings.edit');
+        Route::match(['POST', 'PUT'], '/settings/edit', [AdminSettingController::class, 'update'])->name('settings.update');
         
     });
 });

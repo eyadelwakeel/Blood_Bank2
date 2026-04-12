@@ -36,6 +36,7 @@ return [
     'contact_phone' => 'Contact Phone',
     'contact_address' => 'Contact Address',
     'Back' => 'Back',
+    'cities' => 'Cities',
     
 
 ];

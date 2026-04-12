@@ -55,6 +55,14 @@
               </p>
             </a>
           </li>
+            <li class="nav-item">
+            <a href="{{url(route('admin.cities.index'))}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+               @lang('messages.cities')
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{url(route('admin.users.index'))}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

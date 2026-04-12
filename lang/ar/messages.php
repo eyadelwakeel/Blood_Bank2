@@ -36,5 +36,7 @@ return [
     'contact_phone' => 'رقم الهاتف للتواصل',
     'contact_address' => 'العنوان للتواصل',
     'Back' => 'رجوع',
+    'cities' => 'المدن',
+    
 
 ];
