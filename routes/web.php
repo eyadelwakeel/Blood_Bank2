@@ -30,9 +30,6 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
 ], function () {
 
 
-    Route::get('posts', [WebsitePostController::class, 'posts'])->name('posts');
-
-    Route::get('posts/{post}', [WebsitePostController::class, 'postDetails'])->name('posts.details');
 
     //login routes
     Route::get('login', [WebsiteLoginController::class, 'showLoginForm'])
@@ -48,9 +45,14 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
     Route::post('register', [WebsiteRegisterController::class, 'register'])
         ->name('register.submit');
 
+        // posts routes
+    Route::get('posts', [WebsitePostController::class, 'index'])->name('posts');
+    Route::get('posts/{post}', [WebsitePostController::class, 'postDetails'])->name('posts.details');
+
         // get cities by governorate
     Route::get('/cities/{governorate}', [WebsiteRegisterController::class, 'getCities'])->name('cities');
     // donation requests routes
+    Route::get('donation-requests/create', [WebsiteDonationRequestController::class, 'create'])->name('donation-requests.create');
     Route::get('donation-requests', [WebsiteDonationRequestController::class, 'index'])->name('donation-requests');
     Route::get('donation-requests/{id}', [WebsiteDonationRequestController::class, 'show'])->name('donation-requests.show');
 

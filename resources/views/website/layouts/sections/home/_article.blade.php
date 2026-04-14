@@ -14,7 +14,7 @@
                                 <div class="card">
                                     <div class="photo">
                                         <img src="{{ asset('posts/' . $post->photo) }}" class="card-img-top" alt="article photo not found">
-                                        <a href="{{ route('website.posts', $post->id) }}" class="click">المزيد</a>
+                                        <a href="{{ route('website.posts.details', $post->id) }}" class="click">المزيد</a>
                                     </div>
                                     <a href="#" class="favourite">
                                         <i class="far fa-heart"></i>

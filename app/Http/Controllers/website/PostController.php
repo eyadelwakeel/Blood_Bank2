@@ -9,9 +9,21 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     //
-    public function posts($id)
+    public function index()
+    {
+        $posts = Post::latest()->paginate(10);
+        return view('website.subpages.posts', compact('posts'));
+    }
+    public function postDetails($id)
     {
         $post = Post::findOrFail($id);
-        return view('website.subpages.post-details', compact('post'));
+
+        $relatedPosts = Post::where('category_id', $post->category_id)
+            ->where('id', '!=', $post->id)
+            ->latest()
+            ->take(6)
+            ->get();
+
+        return view('website.subpages.post-details', compact('post', 'relatedPosts'));
     }
 }

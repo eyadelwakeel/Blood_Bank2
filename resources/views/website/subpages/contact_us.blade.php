@@ -24,15 +24,8 @@
                             <img src="{{ asset('website/assets/imgs/logo.png') }}">
                         </div>
                         <div class="details">
-                            <!-- 'phone',
-                            'email',
-                            'fb_url',
-                            'x_url',
-                            'app_store_url',
-                            'youtube_url',
-                            'about_app', -->
                             <ul>
-                                <li><span>الجوال:</span> {{ $settings->phone ?? '' }}</li>
+                                <li><span>الجوال:</span> {{ 'https://wa.me/'.$settings->phone }}</li>
                                 <li><span>فاكس:</span> {{ $settings->fax ?? '589654' }}</li>
                                 <li><span>البريد الإلكترونى:</span> {{ $settings->email ?? '' }}</li>
                             </ul>
@@ -53,7 +46,7 @@
                                     <a href="{{ $settings->instagram_url ?? '#' }}" target="_blank"><img src="{{ asset('website/assets/imgs/004-instagram.svg') }}"></a>
                                 </div>
                                 <div class="out-icon">
-                                    <a href="{{ $settings->whatsapp_url ?? '#' }}" target="_blank"><img src="{{ asset('website/assets/imgs/005-whatsapp.svg') }}"></a>
+                                    <a href="{{ 'https://wa.me/'.$settings->phone ?? '#' }}" target="_blank"><img src="{{ asset('website/assets/imgs/005-whatsapp.svg') }}"></a>
                                 </div>
                                 <div class="out-icon">
                                     <a href="{{ $settings->google_plus_url ?? '#' }}" target="_blank"><img src="{{ asset('website/assets/imgs/006-google-plus.svg') }}"></a>
