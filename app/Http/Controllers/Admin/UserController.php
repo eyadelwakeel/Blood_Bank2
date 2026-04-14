@@ -46,6 +46,10 @@ public function index(Request $request)
     public function create()
     {
         //
+        $governorates = Governorate::all();
+        $cities = City::all();
+        $bloodTypes = BloodType::all();
+        return view('admin.users.create', compact('governorates', 'cities', 'bloodTypes'));
     }
 
     /**
@@ -54,6 +58,18 @@ public function index(Request $request)
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:20',
+            'city_id' => 'required|exists:cities,id',
+            'blood_type_id' => 'required|exists:blood_types,id',
+            'is_active' => 'required|boolean',
+        ]);
+
+        User::create($request->all());
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
+
     }
 
     /**
@@ -72,6 +88,11 @@ public function index(Request $request)
     public function edit(string $id)
     {
         //
+        $user = User::findOrFail($id);
+        $governorates = Governorate::all();
+        $cities = City::all();
+        $bloodTypes = BloodType::all();
+        return view('admin.users.edit', compact('user', 'governorates', 'cities', 'bloodTypes'));
     }
 
     /**
@@ -80,6 +101,9 @@ public function index(Request $request)
     public function update(Request $request, string $id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->update($request->only(['name', 'email', 'phone', 'city_id', 'blood_type_id', 'is_active']));
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     /**

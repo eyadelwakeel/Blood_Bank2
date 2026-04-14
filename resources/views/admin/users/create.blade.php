@@ -8,7 +8,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Governorates List </li>
+                <li class="breadcrumb-item active">Users List </li>
             </ol>
         </div><!-- /.col -->
     </div><!-- /.row -->
@@ -26,41 +26,62 @@
                     <h3 class="card-title">@lang('messages.create')</h3>
                 </div>
 
-                <form action="{{ route('admin.governorates.store') }}" method="POST">
+                 <form action="{{ route('admin.users.store') }}" method="POST">
                     @csrf
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Governorate Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                class="form-control"
-                                id="name"
-                                placeholder="Enter governorate name"
-                                required
-                            >
 
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Select Governorate</label>
-                            <select
-                                name="country_id"
-                                class="form-control"
-                                id="country_id"
-                                required
-                                >
-                                @foreach($governorates as $governorate)
-                                    <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
+                            <label>User Name</label>
+                            <input type="text" name="name" class="form-control" required>
+
+                            <label>User Email</label>
+                            <input type="email" name="email" class="form-control" required>
+
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control" required>
+
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" required>
+
+                            <label>Birth Date</label>
+                            <input type="date" name="birth_date" class="form-control">
+
+                            <label>Last Donation Date</label>
+                            <input type="date" name="last_donation_date" class="form-control">
+
+                            <label>Blood Type</label>
+                            <select name="blood_type_id" class="form-control" required>
+                                <option value="">Select Blood Type</option>
+                                @foreach($bloodTypes as $bloodType)
+                                    <option value="{{ $bloodType->id }}">
+                                        {{ $bloodType->name }}
+                                    </option>
                                 @endforeach
                             </select>
-                            
+
+                            <label>City</label>
+                            <select name="city_id" class="form-control" required>
+                                <option value="">Select City</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}">
+                                        {{ $city->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <label>Status</label>
+                            <select name="is_active" class="form-control" required>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+
                         </div>
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">
-                            @lang('messages.submit')
+                        <button type="submit" class="btn btn-success">
+                            Save
                         </button>
                     </div>
 

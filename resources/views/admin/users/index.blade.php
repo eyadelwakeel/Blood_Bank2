@@ -124,10 +124,10 @@
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.show')
                                         </a>
-                                        <!-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-edit"></i>
                                             @lang('messages.edit')
-                                        </a> -->
+                                        </a>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')
