@@ -52,10 +52,10 @@ Route::group(['prefix' => 'website','as' => 'website.','middleware' => ['web']
         // get cities by governorate
     Route::get('/cities/{governorate}', [WebsiteRegisterController::class, 'getCities'])->name('cities');
     // donation requests routes
-    Route::get('donation-requests/create', [WebsiteDonationRequestController::class, 'create'])->name('donation-requests.create');
     Route::get('donation-requests', [WebsiteDonationRequestController::class, 'index'])->name('donation-requests');
-    Route::get('donation-requests/{id}', [WebsiteDonationRequestController::class, 'show'])->name('donation-requests.show');
-
+    Route::get('/make-donation-request', [WebsiteDonationRequestController::class, 'create'])->name('make-donation-request');
+    Route::post('/store-donation-request', [WebsiteDonationRequestController::class, 'store'])->name('store-donation-request');
+    Route::get('/get-cities/{id}', [WebsiteDonationRequestController::class, 'getCities']);
     // general routes
     Route::get('who-are-us', [WebsiteGeneralController::class, 'whoAreUs'])->name('who-are-us');
     Route::get('contact-us', [WebsiteGeneralController::class, 'contactUs'])->name('contact-us');

@@ -1,51 +1,53 @@
  <!--nav-->
-        <div class="nav-bar">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-                    <a class="navbar-brand" href="#">
-                        <img src="{{ asset('imgs/logo.png') }}" class="d-inline-block align-top" alt="">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ route('website.home') }}">الرئيسية <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">عن بنك الدم</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">المقالات</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('website.donation-requests') }}">طلبات التبرع</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('website.who-are-us') }}">من نحن</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('website.contact-us') }}">اتصل بنا</a>
-                            </li>
-                        </ul>
-                        
-                        <!--not a member-->
-                        <div class="accounts">
-                            <a href="{{ route('website.register') }}" class="create">إنشاء حساب جديد</a>
-                            <a href="{{ route('website.login') }}" class="signin">الدخول</a>
-                        </div>
-                        
-                        <!--I'm a member
+ <div class="nav-bar">
+     <nav class="navbar navbar-expand-lg navbar-light">
+         <div class="container">
+             <a class="navbar-brand" href="#">
+                 <img src="{{ asset('website/assets/imgs/logo.png') }}" class="d-inline-block align-top" alt="">
+             </a>
+             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="collapse navbar-collapse" id="navbarNav">
+                 <ul class="navbar-nav">
+                     <li class="nav-item active">
+                         <a class="nav-link" href="{{ route('website.home') }}">الرئيسية <span class="sr-only">(current)</span></a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="#">عن بنك الدم</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="#">المقالات</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{{ route('website.donation-requests') }}">طلبات التبرع</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{{ route('website.who-are-us') }}">من نحن</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{{ route('website.contact-us') }}">اتصل بنا</a>
+                     </li>
+                 </ul>
 
-                        <a href="#" class="donate">
-                            <img src="imgs/transfusion.svg">
-                            <p>طلب تبرع</p>
-                        </a>
+                 <!--not a member-->
+                 <div class="accounts">
+                     @if(!request()->routeIs('website.donation-requests'))
+                     <a href="{{ route('website.register') }}" class="create">إنشاء حساب جديد</a>
+                     <a href="{{ route('website.login') }}" class="signin">الدخول</a>
+                     @else
+                     <a href="{{ route('website.make-donation-request') }}" class="donate">
+                         <img src="{{ asset('website/assets/imgs/transfusion.svg') }}">
+                         <p>طلب تبرع</p>
+                     </a>
+                     @endif
+                 </div>
 
-                        -->
-                        
-                    </div>
-                </div>
-            </nav>
-        </div>
+
+             </div>
+         </div>
+     </nav>
+ </div>
+
+
+ 

@@ -9,7 +9,9 @@
                     <div class="row whatsapp">
                         <a href="#">
                             <img src="{{ asset('website/assets/imgs/whats.png') }}">
-                            <p dir="ltr">+002  1215454551</p>
+                            <p dir="ltr" href="{{ 'https://wa.me/'.$settings->phone ?? '#' }}" target="_blank">
+                                {{ $settings->phone ?? '01011588455' }}
+                            </p>
                         </a>
                     </div>
                 </div>
