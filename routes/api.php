@@ -12,9 +12,7 @@ use App\Http\Controllers\Api\v1\ResetPasswordController;
 use App\Http\Controllers\Api\v1\UserDataController;
 use App\Http\Controllers\Api\v1\ChangePassword;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 
 Route::get('blood_types',[GeneralController::class,'blood_types']);
 Route::get('governoeates',[GeneralController::class,'governoeates']);

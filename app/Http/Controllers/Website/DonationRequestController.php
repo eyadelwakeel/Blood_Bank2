@@ -67,8 +67,8 @@ class DonationRequestController extends Controller
             'notes' => $request->notes,
             'hospital_name' => $request->hospital_name,
             'bags_number' => $request->bags_number,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
+            'latitude' => $request->latitude ?? 0.0,
+            'longitude' => $request->longitude ?? 0.0,
             'user_id' => Auth::id(),
         ]);
 
